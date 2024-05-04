@@ -6,12 +6,13 @@ import {useQuery} from 'react-query';
 import {fetchAnimeInfo} from '../utils/utils';
 import Pill from '../components/subcomonents/Pill';
 import Pagination from '@cherry-soft/react-native-basic-pagination';
+import {useNavigation} from '@react-navigation/native';
 // import PaginatedListView from 'react-native-paginated-listview';
 export default function InfoScreen({route}: any) {
   let {item}: {item: IAnimeEntry; id: string | number} = route.params;
   let [id, setId] = useState<number | string>(String(item.id));
   let [page, setPage] = useState<number>(1);
-
+  let navigation = useNavigation<any>();
   useEffect(() => {
     if (item.id) {
       setId(item.id);
@@ -84,6 +85,13 @@ export default function InfoScreen({route}: any) {
             {paginatedData?.map(episode => (
               <View key={episode.id}>
                 <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('WatchScreen', {
+                      item: item,
+                      episode_id: episode.id,
+                      episode_num: episode.number,
+                    });
+                  }}
                   style={tw('bg-amber-400 p-1 px-2 rounded-md')}>
                   <Text style={tw('text-xs text-black')}>{episode.number}</Text>
                 </TouchableOpacity>

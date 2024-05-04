@@ -14,7 +14,7 @@ export default function Card({item}: {item: IAnimeEntry}) {
         onPress={() => {
           navigation.navigate('InfoScreen', {
             item: item,
-            id:item.id
+            id: item.id,
           });
         }}>
         <Image

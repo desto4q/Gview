@@ -44,5 +44,21 @@ interface IAnimePage {
   hasNextPage: boolean;
   results: IAnimeEntry[];
 }
+
+
+interface Source {
+  url: string;
+  isM3U8: boolean;
+  quality: string;
+}
+
+interface EpisodeData {
+  headers: {
+    Referer: string;
+  };
+  sources: Source[];
+  download: string;
+}
+
 export {tw, colors,wp,hp};
-export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo};
+export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo,EpisodeData};
