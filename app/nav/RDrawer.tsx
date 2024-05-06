@@ -5,7 +5,7 @@ import RStack from './RStack';
 let Drawer = createDrawerNavigator();
 export default function RDrawer() {
   return (
-    <Drawer.Navigator screenOptions={{headerShown: false}}>
+    <Drawer.Navigator screenOptions={{headerShown: false,freezeOnBlur:true}}>
       <Drawer.Screen name="StackScreen" component={RStack} />
     </Drawer.Navigator>
   );

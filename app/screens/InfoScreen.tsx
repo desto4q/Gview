@@ -1,12 +1,14 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {IAnimeEntry, IAnimeInfo, hp, tw} from '../exports/exports';
+import {IAnimeEntry, IAnimeInfo, colors, hp, tw} from '../exports/exports';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useQuery} from 'react-query';
 import {fetchAnimeInfo} from '../utils/utils';
 import Pill from '../components/subcomonents/Pill';
 import Pagination from '@cherry-soft/react-native-basic-pagination';
 import {useNavigation} from '@react-navigation/native';
+import {AiOutlineArrowLeft} from 'rn-icons/ai';
+import Loading from '../components/Loading';
 // import PaginatedListView from 'react-native-paginated-listview';
 export default function InfoScreen({route}: any) {
   let {item}: {item: IAnimeEntry; id: string | number} = route.params;
@@ -18,7 +20,7 @@ export default function InfoScreen({route}: any) {
       setId(item.id);
     }
   }, [item.id]);
-  let {data} = useQuery<IAnimeInfo>([id], async () => {
+  let {data, isFetching} = useQuery<IAnimeInfo>([id], async () => {
     if (id) {
       return await fetchAnimeInfo({id: id});
     }
@@ -30,21 +32,28 @@ export default function InfoScreen({route}: any) {
   return (
     <View style={tw('flex-1  ')}>
       <View style={tw('flex-1 gap-2 max-w-[90%] w-full self-center')}>
-        <View
-          style={tw(
-            'h-12 items-center justify-center border-b border-emerald-800',
-          )}>
-          <Text style={tw('text-2xl  ')}>GView</Text>
+        <View style={tw('h-12  items-center gap-4  flex-row')}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <AiOutlineArrowLeft size={24} fill={colors.amber[200]} />
+          </TouchableOpacity>
+          <Text style={tw('text-lg  ')}>Anime Details</Text>
         </View>
         <ScrollView
           style={tw('flex-1')}
           contentContainerStyle={tw('gap-2 px-2')}
           showsVerticalScrollIndicator={false}>
           <View style={{...tw('w-full self-center'), height: hp(60)}}>
-            {data?.image && (
-              <Image
-                source={{uri: data?.image}}
-                style={tw('w-full h-full rounded-2xl')}></Image>
+            {isFetching ? (
+              <Loading />
+            ) : (
+              data?.image && (
+                <Image
+                  source={{uri: data?.image}}
+                  style={tw('w-full h-full rounded-2xl')}></Image>
+              )
             )}
           </View>
           <View style={tw('gap-2')}>
@@ -74,7 +83,7 @@ export default function InfoScreen({route}: any) {
             )}>
             <Text>Genre:</Text>
             {data?.genres.map(item => {
-              return <Pill title={item} />;
+              return <Pill key={item} title={item} />;
             })}
           </View>
 
@@ -101,8 +110,8 @@ export default function InfoScreen({route}: any) {
           {data && (
             <Pagination
               showLastPagesButtons
-              btnStyle={tw(' px-2 p-1')}
-              textStyle={tw('text-lg')}
+              btnStyle={tw(' p-1 px-2 rounded-md')}
+              textStyle={tw('text-xs')}
               totalItems={Number(data.episodes.length)}
               pageSize={pageSize}
               currentPage={page}

@@ -4,8 +4,8 @@ import RStack from './nav/RStack';
 let client = new QueryClient();
 export default function Main() {
   return (
-    <NavigationContainer theme={DarkTheme}>
-      <QueryClientProvider client={client}>
+    <NavigationContainer theme={DarkTheme} >
+      <QueryClientProvider client={client} >
         <RStack />
       </QueryClientProvider>
     </NavigationContainer>

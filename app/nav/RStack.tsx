@@ -6,7 +6,7 @@ import WatchScreen from '../screens/WatchScreen';
 let Stack = createStackNavigator();
 export default function RStack() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{headerShown: false, freezeOnBlur: true}}>
       <Stack.Screen name="TabScreen" component={Rtabs} />
       <Stack.Screen name="InfoScreen" component={InfoScreen} />
       <Stack.Screen name="WatchScreen" component={WatchScreen} />

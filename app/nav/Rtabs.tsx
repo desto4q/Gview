@@ -1,12 +1,18 @@
 import {} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
-import {AiFillHome, AiOutlineMenuFold, AiOutlineSearch} from 'rn-icons/ai';
+import {
+  AiFillFolder,
+  AiFillHome,
+  AiOutlineMenuFold,
+  AiOutlineSearch,
+} from 'rn-icons/ai';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import {colors, tw} from '../exports/exports';
 import {useEffect} from 'react';
 import SearchScreen from '../screens/SearchScreen';
+import DownloadsScreen from '../screens/DownloadsScreen';
 let Tab = createBottomTabNavigator();
 export default function Rtabs() {
   // let navigation = useNavigation();
@@ -47,6 +53,20 @@ export default function Rtabs() {
           },
         }}
         component={SearchScreen}
+      />
+      <Tab.Screen
+        name="DownloadsScreen"
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <AiFillFolder
+                fill={focused ? colors.emerald[400] : colors.neutral[400]}
+                size={22}
+              />
+            );
+          },
+        }}
+        component={DownloadsScreen}
       />
     </Tab.Navigator>
   );

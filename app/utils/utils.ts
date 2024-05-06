@@ -36,16 +36,28 @@ let fetchEpisode = async ({id}: {id: string | number}) => {
   return resp;
 };
 
-let queryEpisode = async ({
+let queryAnime = async ({
   query,
   pid,
 }: {
   query: string;
   pid: number | string;
 }) => {
-  let resp = await fetch(`https://api.consumet.org/anime/gogoanime/${query}?page=${pid}
+  try {
+    console.log("tring")
+    let resp =
+      await fetch(`https://dezz-consument.vercel.app/anime/gogoanime/${query}?page=${pid}
   `).then(res => res.json());
-  return resp;
+    return resp;
+  } catch (err) {
+    return err;
+  }
 };
 
-export {fetchTop, fetchRecentEpisodes, fetchAnimeInfo, fetchEpisode};
+export {
+  fetchTop,
+  fetchRecentEpisodes,
+  fetchAnimeInfo,
+  fetchEpisode,
+  queryAnime,
+};

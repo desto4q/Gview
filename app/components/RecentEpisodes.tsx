@@ -21,7 +21,7 @@ export default function RecentEpisodes() {
           'flex-1 bg-red-20 flex-row gap-3 mt-4 flex-wrap justify-center',
         )}>
         {data?.results.map(item => {
-          return <Card item={item} />;
+          return <Card key={item.id} item={item} />;
         })}
       </View>
     </View>

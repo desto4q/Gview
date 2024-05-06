@@ -14,17 +14,14 @@ export default function TopAiring() {
 
   return (
     <View>
-      <TouchableOpacity
-        style={tw('bg-emerald-600 p-2 self-start')}
-        onPress={() => {
-          refetch();
-        }}>
-        <Text>TopAiring</Text>
-      </TouchableOpacity>
+      <View>
+        <Text style={tw("text-xl py-1")}>Top Airing</Text>
+      </View>
       <ScrollView
+        showsHorizontalScrollIndicator={false}
         horizontal
         contentContainerStyle={tw('gap-2')}
-        style={tw('p-2')}>
+        style={tw('p-2 py-4')}>
         {airing?.results.map(item => {
           return <AiringCard key={item.id} item={item}></AiringCard>;
         })}
