@@ -10,12 +10,14 @@ export default function HomeScreen() {
   return (
     <View style={tw('flex-1 p-2')}>
       <View style={tw('h-12 items-center  flex-row')}>
+        <View></View>
         <TouchableOpacity onPress={() => {}}></TouchableOpacity>
         <Text style={tw('text-lg  ')}>Home</Text>
       </View>
       <ScrollView>
         <TopAiring />
         <RecentEpisodes />
+        <View style={tw('h-14')}></View>
       </ScrollView>
     </View>
   );

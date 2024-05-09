@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import {
   AiFillFolder,
+  AiFillHeart,
   AiFillHome,
   AiOutlineMenuFold,
   AiOutlineSearch,
@@ -13,6 +14,7 @@ import {colors, tw} from '../exports/exports';
 import {useEffect} from 'react';
 import SearchScreen from '../screens/SearchScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
+import SavedScreen from '../screens/SavedScreen';
 let Tab = createBottomTabNavigator();
 export default function Rtabs() {
   // let navigation = useNavigation();
@@ -53,6 +55,20 @@ export default function Rtabs() {
           },
         }}
         component={SearchScreen}
+      />
+      <Tab.Screen
+        name="SavedScreen"
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <AiFillHeart
+                fill={focused ? colors.emerald[400] : colors.neutral[400]}
+                size={22}
+              />
+            );
+          },
+        }}
+        component={SavedScreen}
       />
       <Tab.Screen
         name="DownloadsScreen"

@@ -44,7 +44,6 @@ let queryAnime = async ({
   pid: number | string;
 }) => {
   try {
-    console.log("tring")
     let resp =
       await fetch(`https://dezz-consument.vercel.app/anime/gogoanime/${query}?page=${pid}
   `).then(res => res.json());

@@ -5,6 +5,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {Storage} from '../storage/storage';
 let colors = tailwind;
 
 interface IEpisode {
@@ -45,7 +46,6 @@ interface IAnimePage {
   results: IAnimeEntry[];
 }
 
-
 interface Source {
   url: string;
   isM3U8: boolean;
@@ -60,5 +60,58 @@ interface EpisodeData {
   download: string;
 }
 
-export {tw, colors,wp,hp};
-export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo,EpisodeData};
+let JSONParser = (item: any) => {
+  try {
+    return JSON.parse(item);
+  } catch (err) {
+    return err;
+  }
+};
+
+let resetFav = async () => {
+  try {
+    Storage.set('favorites', JSON.stringify([]));
+  } catch (err) {
+    return err;
+  }
+};
+let deleteFromFav = async (item: any) => {
+  try {
+    let resp: IAnimeEntry[] = await JSONParser(Storage.getString('favorites'));
+    resp = await resp.filter(itm => item.id != itm.id);
+    Storage.set('favorites', JSON.stringify(resp));
+  } catch (err) {
+    return err;
+  }
+};
+let addToFav = async (item: any) => {
+  try {
+    let exists = false;
+    let resp = await JSONParser(Storage.getString('favorites'));
+    for  await (let items of resp) {
+      if (items.id == item.id) {
+        exists = true;
+        break;
+      }
+    }
+    if (exists) {
+      
+      return null;
+    }
+    let newItem = {
+      id: item.id,
+      title: item.title,
+      url: item.url,
+      image: item.image,
+    };
+    let newList = [...resp, newItem];
+    Storage.set('favorites', JSON.stringify(newList));
+    // console.log(newList);
+    return newList;
+  } catch (err) {
+    return err;
+  }
+};
+
+export {tw, colors, wp, hp, addToFav, deleteFromFav, JSONParser, resetFav};
+export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo, EpisodeData};

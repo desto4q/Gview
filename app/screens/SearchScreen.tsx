@@ -1,19 +1,14 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useQuery} from 'react-query';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {IAnimePage, colors, tw} from '../exports/exports';
 import {queryAnime} from '../utils/utils';
-import Card from '../components/subcomonents/Card';
-import {
-  AiFillMinusCircle,
-  AiFillPlusCircle,
-  AiOutlineArrowLeft,
-  AiOutlineSearch,
-} from 'rn-icons/ai';
+// import Card from '../components/subcomonents/Card';
+import {AiOutlineSearch} from 'rn-icons/ai';
 import SearchCard from '../components/subcomonents/SearchCard';
 import Loading from '../components/Loading';
-import Pagination from '@cherry-soft/react-native-basic-pagination';
+// import Pagination from '@cherry-soft/react-native-basic-pagination';
 import Pager from '../components/subcomonents/Pager';
 import {useNavigation} from '@react-navigation/native';
 
@@ -26,11 +21,13 @@ export default function SearchScreen() {
     () => {
       return queryAnime({
         pid: pid,
-        query: searchTerm.length > 1 ? searchTerm : 'naruto',
+        query: searchTerm.length > 0 ? searchTerm : 'naruto',
       });
     },
   );
-  let navigate = useNavigation();
+  useEffect(() => {
+    // console.log(AnimeList);
+  }, [AnimeList]);
 
   return (
     <View style={tw('flex-1 gap-4 ')}>
@@ -45,8 +42,8 @@ export default function SearchScreen() {
         <Text>Search Anime</Text>
         <Pager pid={pid} setPid={setPid} />
       </View>
-      <View style={tw('h-14justify-center')}>
-        <View style={tw('pl-2 bg bg-neutral-800 items-center flex-row')}>
+      <View style={tw('h-14 justify-center')}>
+        <View style={tw('pl-2  bg-neutral-800 items-center flex-row')}>
           <TextInput
             onChangeText={setSearchQuery}
             value={searchQuery}
@@ -54,7 +51,9 @@ export default function SearchScreen() {
             style={tw('w-90%')}
             onSubmitEditing={e => {
               setSearchTerm(searchQuery);
-            }}></TextInput>
+            }}
+          />
+
           <TouchableOpacity
             style={tw(
               'ml-auto bg-neutral-900  h-14 px-3 items-center justify-center',
