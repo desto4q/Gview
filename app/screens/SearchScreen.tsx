@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useQuery} from 'react-query';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {IAnimePage, colors, tw} from '../exports/exports';
@@ -10,7 +10,6 @@ import SearchCard from '../components/subcomonents/SearchCard';
 import Loading from '../components/Loading';
 // import Pagination from '@cherry-soft/react-native-basic-pagination';
 import Pager from '../components/subcomonents/Pager';
-import {useNavigation} from '@react-navigation/native';
 
 export default function SearchScreen() {
   let [searchQuery, setSearchQuery] = useState<string>('naruto');
@@ -32,13 +31,7 @@ export default function SearchScreen() {
   return (
     <View style={tw('flex-1 gap-4 ')}>
       <View style={tw('h-12 items-center flex-row px-2')}>
-        {/* <TouchableOpacity
-          onPress={() => {
-            navigate.goBack();
-          }}
-          style={tw(' items-center h-full justify-center px-2')}>
-          <AiOutlineArrowLeft size={24} fill={colors.amber[400]} />
-        </TouchableOpacity> */}
+
         <Text>Search Anime</Text>
         <Pager pid={pid} setPid={setPid} />
       </View>
@@ -71,7 +64,7 @@ export default function SearchScreen() {
         </Text>
       </View>
       <ScrollView
-        contentContainerStyle={tw('flex-row gap-2 flex-wrap justify-center')}>
+        contentContainerStyle={tw('flex-row gap-4 flex-wrap justify-center')}>
         {isFetching ? (
           <Loading />
         ) : (

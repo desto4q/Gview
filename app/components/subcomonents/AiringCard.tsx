@@ -26,7 +26,6 @@ export default function AiringCard({item}: {item: IAnimeEntry}) {
             'bg-emerald-500 rounded-md p-2  self-start text-black text-xs',
           )}
           numberOfLines={2}>
-          {' '}
           EP: {item.episodeNumber}
         </Text>
       </TouchableOpacity>

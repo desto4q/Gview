@@ -1181,10 +1181,10 @@
   resolved "https://registry.yarnpkg.com/@cherry-soft/react-native-basic-pagination/-/react-native-basic-pagination-1.0.4.tgz#57a3f94d303a636e67f5f565514645a646fe7fef"
   integrity sha512-6xohq+MsdHohlLpzOAXWvi1hUaMJmhzpANNq0qmRP3MSk6tG/JrEVSuIeK/0mLL8a/mxgciMXibK8+pdRS8soQ==
 
-"@dr.pogodin/react-native-fs@^2.24.6":
-  version "2.24.6"
-  resolved "https://registry.yarnpkg.com/@dr.pogodin/react-native-fs/-/react-native-fs-2.24.6.tgz#a673628d0b4b26f28cab211af98a9e83c12ae90b"
-  integrity sha512-DMEL/FLf+LrRnegBDbLHDRCAv/flhrZwbSOzHmwGPjAd8gF6Bn48z8gFmrwlxcAtR0rxo1K1L8gWzddyR/LV8A==
+"@dr.pogodin/react-native-fs@^2.25.0":
+  version "2.25.0"
+  resolved "https://registry.yarnpkg.com/@dr.pogodin/react-native-fs/-/react-native-fs-2.25.0.tgz#cc5a6ee24c37b3afebb347da69bac48844331275"
+  integrity sha512-mSDacuz/nHf+Qpsz+5dCzpygLNe0aCeR5jytStUj7WB+EJStvIm4KmcI4Sy8vYme2GE+DtbvNVqsZ61zujz3Lw==
   dependencies:
     buffer "^6.0.3"
 
@@ -1540,6 +1540,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@kesha-antonov/react-native-background-downloader@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@kesha-antonov/react-native-background-downloader/-/react-native-background-downloader-3.1.3.tgz#2da4cd12218674f0315684ab76a5ef1896e66b5b"
+  integrity sha512-4dU+mj8MtovWofdSsE0fXWC/yXuFH+IRA2t0TKs/EL3IiAcy+K+TmCcG5w2zDbYwUTKf4Y92wT9knTp1AY9kIw==
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
@@ -4210,6 +4215,14 @@ hermes-profile-transformer@^0.0.6:
   dependencies:
     source-map "^0.7.3"
 
+hlsdownloader@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/hlsdownloader/-/hlsdownloader-3.2.5.tgz#61b2733192bb8a650f9bcb2f82aa4d189df5f8ef"
+  integrity sha512-zsvF+zG2/aDlncPIcKTP/cuO0gPOZi9+msLtBIToMWzL+HzeivTggDe5JxlUdtmqu8geXJm3gRsuWDR2Hir5rw==
+  dependencies:
+    ky "^1.2.4"
+    p-limit "^5.0.0"
+
 hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
@@ -5160,6 +5173,11 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
+ky@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-1.2.4.tgz#d095aa848c686116f3326bfce53d9c2ffdb692c1"
+  integrity sha512-CfSrf4a0yj1n6WgPT6kQNQOopIGLkQzqSAXo05oKByaH7G3SiqW4a8jGox0p9whMXqO49H7ljgigivrMyycAVA==
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -5888,6 +5906,13 @@ p-limit@^3.0.2, p-limit@^3.1.0:
   dependencies:
     yocto-queue "^0.1.0"
 
+p-limit@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-5.0.0.tgz#6946d5b7140b649b7a33a027d89b4c625b3a5985"
+  integrity sha512-/Eaoq+QyLSiXQ4lyYV23f14mZRQcXnxfHrN0vCai+ak9G0pp9iEQukIIZq5NccEvwRB8PUnZT0KsOoDCINS1qQ==
+  dependencies:
+    yocto-queue "^1.0.0"
+
 p-locate@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/p-locate/-/p-locate-3.0.0.tgz#322d69a05c0264b25997d9f40cd8a891ab0064a4"
@@ -6279,6 +6304,11 @@ react-native-svg@^15.2.0:
   dependencies:
     css-select "^5.1.0"
     css-tree "^1.1.3"
+
+react-native-uuid@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-uuid/-/react-native-uuid-2.0.2.tgz#3da192e342ef35ee95a7def676ab41c1256dfd66"
+  integrity sha512-5ypj/hV58P+6VREdjkW0EudSibsH3WdqDERoHKnD9syFWjF+NfRWWrJb2sa3LIwI5zpzMvUiabs+DX40WHpEMw==
 
 react-native-video@^6.0.0-beta.8:
   version "6.0.0-beta.8"
@@ -7652,3 +7682,8 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+yocto-queue@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.0.0.tgz#7f816433fb2cbc511ec8bf7d263c3b58a1a3c251"
+  integrity sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==

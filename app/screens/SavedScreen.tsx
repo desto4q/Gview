@@ -1,15 +1,13 @@
 import {
   View,
   Text,
-  Touchable,
   TouchableOpacity,
-  RefreshControl,
+  RefreshControl,ScrollView
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {IAnimeEntry, JSONParser, resetFav, tw} from '../exports/exports';
 import {Storage} from '../storage/storage';
-import {ScrollView} from 'react-native-gesture-handler';
-import Card from '../components/subcomonents/Card';
+// 
 import {SavedCards} from '../components/subcomonents/SavedCard';
 
 export default function SavedScreen() {
@@ -49,16 +47,17 @@ export default function SavedScreen() {
         </View>
       </View>
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={isRefreshing} onRefresh={updateState} />
+        refreshControl={ 
+          <RefreshControl enabled refreshing={isRefreshing} onRefresh={updateState} />
         }
-        contentContainerStyle={tw('flex-row gap-4 justify-center flex-wrap')}>
+        contentContainerStyle={tw('flex-row gap-4 justify-center flex-wrap pb-20')}>
         {items.map(item => {
           return (
             <SavedCards updateState={updateState} item={item} key={item.id} />
           );
         })}
       </ScrollView>
+      {/* <View style={tw('h-14 w-full')}></View> */}
     </View>
   );
 }

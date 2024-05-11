@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useQuery} from 'react-query';
 import {EpisodeData, IAnimeInfo, hp, tw} from '../exports/exports';
 import {fetchAnimeInfo, fetchEpisode} from '../utils/utils';
@@ -7,6 +7,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import Pagination from '@cherry-soft/react-native-basic-pagination';
 import {useNavigation} from '@react-navigation/native';
+import {} from '@dr.pogodin/react-native-fs';
 
 type IQuality = '360p' | '480p' | '720p';
 let Aquality = ['360p', '480p', '720p'];
@@ -47,6 +48,7 @@ export default function WatchScreen({route}: any) {
           paused
           controls
           poster={AnimeInfo?.image}
+          posterResizeMode="contain"
           source={{
             uri: episode?.sources.find(({quality}) => quality === mQuality)
               ?.url,

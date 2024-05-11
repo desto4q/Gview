@@ -1,9 +1,10 @@
 import {View, Text, Image} from 'react-native';
 import React from 'react';
-import {IAnimeEntry, tw} from '../../exports/exports';
+import {IAnimeEntry, addToFav, tw} from '../../exports/exports';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import Loading from '../Loading';
+import {AiFillHeart} from 'rn-icons/ai';
 
 interface ISearchEntry extends IAnimeEntry {
   subOrDub?: 'sub' | 'dub';
@@ -41,6 +42,14 @@ export default function SearchCard({item}: {item: ISearchEntry}) {
           </Text>
           <Text>{String(item?.releaseDate).replace('Released: ', '')}</Text>
         </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => {
+          addToFav(item);
+        }}
+        style={tw('mt-2 bg-amber-400 p-2 rounded-md self-start')}>
+        <AiFillHeart />
       </TouchableOpacity>
     </View>
   );

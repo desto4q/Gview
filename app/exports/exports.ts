@@ -6,6 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {Storage} from '../storage/storage';
+
 let colors = tailwind;
 
 interface IEpisode {
@@ -88,14 +89,13 @@ let addToFav = async (item: any) => {
   try {
     let exists = false;
     let resp = await JSONParser(Storage.getString('favorites'));
-    for  await (let items of resp) {
+    for await (let items of resp) {
       if (items.id == item.id) {
         exists = true;
         break;
       }
     }
     if (exists) {
-      
       return null;
     }
     let newItem = {
@@ -112,6 +112,18 @@ let addToFav = async (item: any) => {
     return err;
   }
 };
+let link =
+  'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_5MB.mp4';
 
-export {tw, colors, wp, hp, addToFav, deleteFromFav, JSONParser, resetFav};
+export {
+  tw,
+  colors,
+  wp,
+  hp,
+  addToFav,
+  deleteFromFav,
+  JSONParser,
+  resetFav,
+  link,
+};
 export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo, EpisodeData};

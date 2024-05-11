@@ -37,7 +37,7 @@ export default function Card({item}: {item: IAnimeEntry}) {
           onPress={() => {
             addToFav(item);
           }}
-          style={tw('p-2 self-start bg-orange-500   rounded-md ')}>
+          style={tw('p-2 self-start bg-amber-400   rounded-md ')}>
           <AiFillHeart />
         </TouchableOpacity>
       </View>
