@@ -10,20 +10,23 @@ import SearchCard from '../components/subcomonents/SearchCard';
 import Loading from '../components/Loading';
 // import Pagination from '@cherry-soft/react-native-basic-pagination';
 import Pager from '../components/subcomonents/Pager';
+import Reload from '../components/Reload';
 
 export default function SearchScreen() {
   let [searchQuery, setSearchQuery] = useState<string>('naruto');
   let [searchTerm, setSearchTerm] = useState<string>('');
   let [pid, setPid] = useState<number>(1);
-  let {data: AnimeList, isFetching} = useQuery<IAnimePage>(
-    [pid, searchTerm],
-    () => {
-      return queryAnime({
-        pid: pid,
-        query: searchTerm.length > 0 ? searchTerm : 'naruto',
-      });
-    },
-  );
+  let {
+    data: AnimeList,
+    isFetching,
+    isError,
+    refetch,
+  } = useQuery<IAnimePage>([pid, searchTerm], () => {
+    return queryAnime({
+      pid: pid,
+      query: searchTerm.length > 0 ? searchTerm : 'naruto',
+    });
+  });
   useEffect(() => {
     // console.log(AnimeList);
   }, [AnimeList]);
@@ -31,7 +34,6 @@ export default function SearchScreen() {
   return (
     <View style={tw('flex-1 gap-4 ')}>
       <View style={tw('h-12 items-center flex-row px-2')}>
-
         <Text>Search Anime</Text>
         <Pager pid={pid} setPid={setPid} />
       </View>
@@ -65,12 +67,16 @@ export default function SearchScreen() {
       </View>
       <ScrollView
         contentContainerStyle={tw('flex-row gap-4 flex-wrap justify-center')}>
-        {isFetching ? (
-          <Loading />
+        {!isError ? (
+          isFetching ? (
+            <Loading />
+          ) : (
+            AnimeList?.results.map(item => {
+              return <SearchCard key={item.id} item={item} />;
+            })
+          )
         ) : (
-          AnimeList?.results.map(item => {
-            return <SearchCard key={item.id} item={item} />;
-          })
+          <Reload reload={refetch} />
         )}
         <View style={tw('h-16  w-full')}></View>
       </ScrollView>

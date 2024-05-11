@@ -1,15 +1,16 @@
-import {View, Text, ScrollView, RefreshControl} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, RefreshControl} from 'react-native';
+import {useState} from 'react';
 import Pager from '../components/subcomonents/Pager';
 import {fetchRecentEpisodes} from '../utils/utils';
 import {useQuery} from 'react-query';
 import {IAnimePage, colors, tw} from '../exports/exports';
+import {AiOutlineArrowLeft} from 'rn-icons/ai';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import {ScrollView} from 'react-native-gesture-handler';
+import Loading from '../components/Loading';
 import Card from '../components/subcomonents/Card';
 import Reload from '../components/Reload';
-import Loading from '../components/Loading';
-import {AiOutlineArrowLeft} from 'rn-icons/ai';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
 
 export default function RecentScreen() {
   let [page, setPage] = useState<number | string>(1);
@@ -37,7 +38,7 @@ export default function RecentScreen() {
           <RefreshControl refreshing={isFetching} onRefresh={refetch} />
         }
         contentContainerStyle={tw(
-          'flex-row justify-center flex-1 items-center gap-4 flex-wrap pb-20',
+          'flex-row justify-center  items-center gap-4 flex-wrap pb-20',
         )}
         style={tw('  flex-1')}>
         {!isError ? (
