@@ -1,7 +1,7 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, RefreshControl,ScrollView} from 'react-native';
 import {useEffect, useState} from 'react';
 import {useQuery} from 'react-query';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import {TextInput} from 'react-native-gesture-handler';
 import {IAnimePage, colors, tw} from '../exports/exports';
 import {queryAnime} from '../utils/utils';
 // import Card from '../components/subcomonents/Card';
@@ -33,12 +33,9 @@ export default function SearchScreen() {
 
   return (
     <View style={tw('flex-1 gap-4 ')}>
-      <View style={tw('h-12 items-center flex-row px-2')}>
-        <Text>Search Anime</Text>
-        <Pager pid={pid} setPid={setPid} />
-      </View>
-      <View style={tw('h-14 justify-center')}>
-        <View style={tw('pl-2  bg-neutral-800 items-center flex-row')}>
+      <View style={tw('h-14 justify-center px-2')}>
+        <View
+          style={tw('pl-2  bg-neutral-800 rounded-md items-center flex-row ')}>
           <TextInput
             onChangeText={setSearchQuery}
             value={searchQuery}
@@ -51,7 +48,7 @@ export default function SearchScreen() {
 
           <TouchableOpacity
             style={tw(
-              'ml-auto bg-neutral-900  h-14 px-3 items-center justify-center',
+              'ml-auto bg-neutral-900  rounded-r-md h-14 px-3 items-center justify-center',
             )}
             onPress={() => {
               setSearchTerm(searchQuery);
@@ -60,12 +57,16 @@ export default function SearchScreen() {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={tw('p-2')}>
+
+      {/* <View style={tw('p-2')}>
         <Text style={tw('text-xl')}>
           Search: {searchTerm ? searchTerm : 'Naruto'}
         </Text>
-      </View>
+      </View> */}
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+        }
         contentContainerStyle={tw('flex-row gap-4 flex-wrap justify-center')}>
         {!isError ? (
           isFetching ? (
@@ -78,6 +79,11 @@ export default function SearchScreen() {
         ) : (
           <Reload reload={refetch} />
         )}
+        {!isFetching ? (
+          <View style={tw('h-12 items-center flex-row px-2')}>
+            <Pager pid={pid} setPid={setPid} />
+          </View>
+        ) : null}
         <View style={tw('h-16  w-full')}></View>
       </ScrollView>
     </View>

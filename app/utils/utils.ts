@@ -52,11 +52,21 @@ let queryAnime = async ({
     return err;
   }
 };
-
+let fetchPopular = async ({page}: IApiProps) => {
+  try {
+    let resp = await fetch(
+      `https://dezz-consument.vercel.app/anime/gogoanime/popular?page${
+        page ? page : 1
+      }`,
+    );
+    return resp.json();
+  } catch (err) {}
+};
 export {
   fetchTop,
   fetchRecentEpisodes,
   fetchAnimeInfo,
   fetchEpisode,
   queryAnime,
+  fetchPopular,
 };

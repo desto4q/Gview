@@ -1,5 +1,3 @@
-import {} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
 import Rtabs from './Rtabs';
 import InfoScreen from '../screens/InfoScreen';
 import WatchScreen from '../screens/WatchScreen';

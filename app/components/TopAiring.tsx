@@ -1,39 +1,49 @@
-import {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import {useQuery} from 'react-query';
 import {IAnimePage, colors, tw} from '../exports/exports';
 import {fetchTop} from '../utils/utils';
-import {ScrollView} from 'react-native-gesture-handler';
-import AiringCard from './subcomonents/AiringCard';
-import {useQuery} from 'react-query';
 import {useNavigation} from '@react-navigation/native';
-import {MdNavigation} from 'rn-icons/md';
-
+import {ScrollView} from 'react-native-gesture-handler';
+import {LiaTruckLoadingSolid} from 'rn-icons/lia';
+import Card from './subcomonents/Card';
+import Reload from './Reload';
+import {BsArrowRightCircleFill} from 'rn-icons/bs';
 export default function TopAiring() {
-  let [pid, setPid] = useState<number | string>(1);
-  let {data: airing, refetch} = useQuery<IAnimePage>([pid], () => {
+  let [pid, setPid] = useState();
+  let {data, isFetching, refetch, isError} = useQuery<IAnimePage>([pid], () => {
     return fetchTop({page: pid});
   });
   let navigation: any = useNavigation();
   return (
-    <View>
-      <View>
+    <View style={tw('mt-2 px-2')}>
+      <View style={tw('py-2 flex-row items-center')}>
+        <Text style={tw('text-xl')}>Top Airing</Text>
         <TouchableOpacity
-          style={tw('flex-row gap-2 items-center')}
           onPress={() => {
             navigation.navigate('TopScreen');
-          }}>
-          <Text style={tw('text-xl py-1')}>Top Airing</Text>
-          <MdNavigation fill={colors.amber[400]} size={20} />
+          }}
+          style={tw(
+            'ml-auto flex-row items-center bg-emerald-400 rounded-md h-full px-2 gap-2 justify-center',
+          )}>
+          <Text style={tw(' text-black')}>See More</Text>
+          <BsArrowRightCircleFill size={14} fill={colors.neutral[900]} />
         </TouchableOpacity>
       </View>
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        contentContainerStyle={tw('gap-2')}
-        style={tw('p-2 py-4')}>
-        {airing?.results.map(item => {
-          return <AiringCard key={item.id} item={item}></AiringCard>;
-        })}
+      <ScrollView horizontal style={tw('py-2 pl-4')}>
+        <View style={tw('flex-1  flex-row gap-3   ')}>
+          {!isError ? (
+            isFetching ? (
+              <LiaTruckLoadingSolid />
+            ) : (
+              data?.results.map(item => {
+                return <Card key={item.id} item={item} />;
+              })
+            )
+          ) : (
+            <Reload reload={refetch} />
+          )}
+        </View>
       </ScrollView>
     </View>
   );

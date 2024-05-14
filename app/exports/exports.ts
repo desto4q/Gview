@@ -39,6 +39,7 @@ interface IAnimeEntry {
   genres?: string[];
   episodeId?: string;
   episodeNumber?: number;
+  releaseDate?: string
 }
 
 interface IAnimePage {
@@ -112,6 +113,7 @@ let addToFav = async (item: any) => {
     return err;
   }
 };
+
 let link =
   'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_5MB.mp4';
 

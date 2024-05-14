@@ -1,5 +1,4 @@
 import {View, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {AiFillMinusCircle, AiFillPlusCircle} from 'rn-icons/ai';
 import {colors, tw} from '../../exports/exports';
@@ -19,7 +18,7 @@ export default function Pager({
   return (
     <View
       style={tw(
-        'h-10 items-center flex-row  pl-2 ml-auto gap-4 bg-neutral-800 rounded-lg',
+        'h-10 items-center self-center flex-row  pl-2 ml-auto gap-4 bg-neutral-800 rounded-lg',
       )}>
       <TouchableOpacity
         style={tw('h-full items-center justify-center  px-2')}
