@@ -1,5 +1,5 @@
 import {DarkTheme, NavigationContainer} from '@react-navigation/native';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import RStack from './nav/RStack';
 import {useEffect} from 'react';
 import {Storage} from './storage/storage';
@@ -9,7 +9,7 @@ import {
   mkdir,
 } from '@dr.pogodin/react-native-fs';
 import {PermissionsAndroid} from 'react-native';
-let client = new QueryClient();
+
 async function requestExternalStoragePermission() {
   try {
     const granted = await PermissionsAndroid.request(
@@ -31,6 +31,8 @@ async function requestExternalStoragePermission() {
     console.warn('Error requesting external storage permission:', err);
   }
 }
+
+let client = new QueryClient();
 export default function Main() {
   useEffect(() => {
     requestExternalStoragePermission();

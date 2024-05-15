@@ -1,7 +1,5 @@
-import {View, Text, Image} from 'react-native';
-import React from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {IAnimeEntry, addToFav, tw} from '../../exports/exports';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import Loading from '../Loading';
 import {AiFillHeart} from 'rn-icons/ai';
@@ -25,12 +23,12 @@ export default function SearchCard({item}: {item: ISearchEntry}) {
         {item.image ? (
           <Image
             source={{uri: item.image}}
-            style={tw('w-full h-50 rounded-lg')}
+            style={tw('w-full h-60 rounded-lg')}
           />
         ) : (
           <Loading />
         )}
-        <Text style={tw('h-[2rem]')} numberOfLines={2}>
+        <Text style={tw('self-center')} numberOfLines={1} ellipsizeMode="tail">
           {item.title}
         </Text>
         <View style={tw('flex-row items-center gap-2')}>
@@ -38,18 +36,17 @@ export default function SearchCard({item}: {item: ISearchEntry}) {
             style={tw(
               'p-2 capitalize bg-emerald-600 text-xs text-black rounded-lg self-start',
             )}>
-            Type: {item.subOrDub}
+            {item.subOrDub}
           </Text>
           <Text>{String(item?.releaseDate).replace('Released: ', '')}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              addToFav(item);
+            }}
+            style={tw(' bg-amber-400 p-2 ml-auto rounded-md self-end')}>
+            <AiFillHeart />
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => {
-          addToFav(item);
-        }}
-        style={tw('mt-2 bg-amber-400 p-2 rounded-md self-start')}>
-        <AiFillHeart />
       </TouchableOpacity>
     </View>
   );

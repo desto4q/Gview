@@ -1,67 +1,64 @@
+import axios from 'axios';
+
 interface IApiProps {
   page?: number | string;
   id?: number | string;
 }
 
-let fetchTop = async ({page}: IApiProps) => {
-  let resp = await fetch(
-    `https://dezz-consument.vercel.app/anime/gogoanime/top-airing?page=${
-      page ? page : 1
-    }`,
-  ).then(res => res.json());
-  //   console.log(resp);
-  return resp;
-};
-
-let fetchRecentEpisodes = async ({page}: IApiProps) => {
-  let resp = await fetch(
-    `https://dezz-consument.vercel.app/anime/gogoanime/recent-episodes?page=${
-      page ? page : 1
-    }`,
-  ).then(res => res.json());
-  //   console.log(resp);
-  return resp;
-};
-let fetchAnimeInfo = async ({id}: IApiProps) => {
-  let resp = await fetch(
-    `https://dezz-consument.vercel.app/anime/gogoanime/info/${id}`,
-  ).then(res => res.json());
-
-  return resp;
-};
-let fetchEpisode = async ({id}: {id: string | number}) => {
-  let resp = await fetch(
-    `https://dezz-consument.vercel.app/anime/gogoanime/watch/${id}?server=gogocdn`,
-  ).then(res => res.json());
-  return resp;
-};
-
-let queryAnime = async ({
-  query,
-  pid,
-}: {
-  query: string;
-  pid: number | string;
-}) => {
+const fetchTop = async ({ page }: IApiProps) => {
   try {
-    let resp =
-      await fetch(`https://dezz-consument.vercel.app/anime/gogoanime/${query}?page=${pid}
-  `).then(res => res.json());
-    return resp;
-  } catch (err) {
-    return err;
+    const response = await axios.get(`https://dezz-consument.vercel.app/anime/gogoanime/top-airing?page=${page ? page : 1}`);
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 };
-let fetchPopular = async ({page}: IApiProps) => {
+
+const fetchRecentEpisodes = async ({ page }: IApiProps) => {
   try {
-    let resp = await fetch(
-      `https://dezz-consument.vercel.app/anime/gogoanime/popular?page${
-        page ? page : 1
-      }`,
-    );
-    return resp.json();
-  } catch (err) {}
+    const response = await axios.get(`https://dezz-consument.vercel.app/anime/gogoanime/recent-episodes?page=${page ? page : 1}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
+
+const fetchAnimeInfo = async ({ id }: IApiProps) => {
+  try {
+    const response = await axios.get(`https://dezz-consument.vercel.app/anime/gogoanime/info/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const fetchEpisode = async ({ id }: { id: string | number }) => {
+  try {
+    const response = await axios.get(`https://dezz-consument.vercel.app/anime/gogoanime/watch/${id}?server=gogocdn`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const queryAnime = async ({ query, pid }: { query: string; pid: number | string }) => {
+  try {
+    const response = await axios.get(`https://dezz-consument.vercel.app/anime/gogoanime/${query}?page=${pid}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const fetchPopular = async ({ page }: IApiProps) => {
+  try {
+    const response = await axios.get(`https://dezz-consument.vercel.app/anime/gogoanime/popular?page=${page ? page : 1}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   fetchTop,
   fetchRecentEpisodes,

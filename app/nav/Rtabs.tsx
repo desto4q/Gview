@@ -25,7 +25,7 @@ export default function Rtabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {...tw('absolute m-2 h-14 mb-3 rounded-lg')},
+        tabBarStyle: {...tw('absolute m-2  h-14 mb-1 rounded-lg')},
         tabBarShowLabel: false,
       }}>
       <Tab.Screen

@@ -24,8 +24,8 @@ export default function SavedScreen() {
     updateState();
   }, []);
   return (
-    <View style={tw('p-2 flex-1')}>
-      <View style={tw('flex-row items-center justify-between mb-3')}>
+    <View style={tw(' flex-1')}>
+      <View style={tw('flex-row items-center px-2 justify-between mb-3')}>
         <Text style={tw('text-xl')}>SavedScreen</Text>
         <View style={tw('flex-row gap-10')}>
           {/* <TouchableOpacity
@@ -50,7 +50,7 @@ export default function SavedScreen() {
         refreshControl={ 
           <RefreshControl enabled refreshing={isRefreshing} onRefresh={updateState} />
         }
-        contentContainerStyle={tw('flex-row gap-4 justify-center flex-wrap pb-20')}>
+        contentContainerStyle={tw('flex-row gap-4 px-4 flex-wrap pb-20')}>
         {items.map(item => {
           return (
             <SavedCards updateState={updateState} item={item} key={item.id} />

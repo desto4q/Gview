@@ -2,7 +2,7 @@ import {View, Text, TouchableOpacity, RefreshControl} from 'react-native';
 import {useState} from 'react';
 import Pager from '../components/subcomonents/Pager';
 import {fetchRecentEpisodes} from '../utils/utils';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {IAnimePage, colors, tw} from '../exports/exports';
 import {AiOutlineArrowLeft} from 'rn-icons/ai';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -15,12 +15,12 @@ import Reload from '../components/Reload';
 export default function RecentScreen() {
   let [page, setPage] = useState<number | string>(1);
   let navigation = useNavigation();
-  let {data, isFetching, refetch, isError} = useQuery<IAnimePage>(
-    [page],
-    () => {
+  let {data, isFetching, refetch, isError} = useQuery<IAnimePage>({
+    queryKey: [page],
+    queryFn: () => {
       return fetchRecentEpisodes({page: page});
     },
-  );
+  });
   return (
     <View style={tw('flex-1')}>
       <View style={tw('h-14 mb-4 flex-row items-center gap-2 px-2')}>

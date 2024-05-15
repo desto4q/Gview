@@ -1,24 +1,52 @@
-import {Text, TouchableOpacity, View,ScrollView}from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import {colors, tw} from '../exports/exports';
-
 
 import RecentEpisodes from '../components/RecentEpisodes';
 import {AiOutlineSearch} from 'rn-icons/ai';
 import LinearGradient from 'react-native-linear-gradient';
 import Popular from '../components/Popular';
 import TopAiring from '../components/TopAiring';
+import {useQueryClient} from '@tanstack/react-query';
+import {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const queryClient = useQueryClient();
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  let navigation = useNavigation<any>()
+  let masReftech = async () => {
+    setIsFetching(true);
+    await queryClient
+      .refetchQueries()
+      .then(resp => {
+        console.log(resp);
+        setIsFetching(false);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   return (
     <View style={tw('flex-1')}>
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={masReftech} />
+        }>
         <LinearGradient
           colors={[colors.neutral[900], 'transparent']}
-          style={tw('h-12 items-center px-2  absolute w-full flex-row z-10')}>
-          <Text style={tw('text-lg  ')}>Home</Text>
+          style={tw(
+            'h-12 items-center px-2 flex-1  absolute w-full flex-row z-10',
+          )}>
+          {/* <Text style={tw('text-lg  ')}>Home</Text> */}
           <TouchableOpacity
             onPress={() => {
-              console.log('clicke');
+              navigation.navigate("SearchScreen")
             }}
             style={tw('ml-auto h-full items-center px-2')}>
             <AiOutlineSearch

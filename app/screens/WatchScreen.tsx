@@ -1,14 +1,12 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, View} from 'react-native';
 import {useState} from 'react';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {EpisodeData, IAnimeInfo, hp, tw} from '../exports/exports';
 import {fetchAnimeInfo, fetchEpisode} from '../utils/utils';
-import {ScrollView} from 'react-native-gesture-handler';
-import Video from 'react-native-video';
-import Pagination from '@cherry-soft/react-native-basic-pagination';
 import {useNavigation} from '@react-navigation/native';
-import {} from '@dr.pogodin/react-native-fs';
-
+import Pagination from '@cherry-soft/react-native-basic-pagination';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import Video from 'react-native-video';
 type IQuality = '360p' | '480p' | '720p';
 let Aquality = ['360p', '480p', '720p'];
 export default function WatchScreen({route}: any) {
@@ -16,23 +14,26 @@ export default function WatchScreen({route}: any) {
   let [id, setId] = useState<number | string>(String(item.id));
   let navigation = useNavigation<any>();
   let [mQuality, setQuality] = useState<IQuality | any>('360p');
-  let {data: AnimeInfo} = useQuery<IAnimeInfo>([id], async () => {
-    if (id) {
-      return await fetchAnimeInfo({id: id});
-    }
+  let {data: AnimeInfo} = useQuery<IAnimeInfo>({
+    queryKey: [id],
+    queryFn: async () => {
+      if (id) {
+        return await fetchAnimeInfo({id: id});
+      }
+    },
   });
-  let {data: episode, isFetching: isEpisodeRefetching} = useQuery<EpisodeData>(
-    [episode_id],
-    () => {
+  let {data: episode, isFetching: isEpisodeRefetching} = useQuery<EpisodeData>({
+    queryKey: [episode_id],
+    queryFn: async () => {
       return fetchEpisode({id: episode_id});
     },
-  );
+  });
   let [page, setPage] = useState<number>(1);
   const pageSize = 20;
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const paginatedData = AnimeInfo?.episodes.slice(startIndex, endIndex);
-
+  console.log(episode);
   return (
     <View style={tw('flex-1 p-2')}>
       <View style={tw('h-14  justify-center')}>
@@ -76,27 +77,34 @@ export default function WatchScreen({route}: any) {
         <View style={tw(' gap-2')}>
           <View style={tw('flex-row items-center gap-2 flex-wrap')}>
             <Text style={tw('text-lg')}>Episodes:</Text>
-            {paginatedData?.map(episode => (
-              <View key={episode.id}>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('WatchScreen', {
-                      item: item,
-                      episode_id: episode.id,
-                      episode_num: episode.number,
-                    });
-                  }}
-                  style={tw(
-                    `${
-                      episode_num == episode.number
-                        ? 'bg-amber-400'
-                        : 'bg-emerald-400'
-                    } p-1 px-2 rounded-md`,
-                  )}>
-                  <Text style={tw('text-xs text-black')}>{episode.number}</Text>
-                </TouchableOpacity>
-              </View>
-            ))}
+            {paginatedData?.map(episode => {
+              if (episode.number == 0) {
+                return null;
+              }
+              return (
+                <View key={episode.id}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('WatchScreen', {
+                        item: item,
+                        episode_id: episode.id,
+                        episode_num: episode.number,
+                      });
+                    }}
+                    style={tw(
+                      `${
+                        episode_num == episode.number
+                          ? 'bg-amber-400'
+                          : 'bg-emerald-400'
+                      } p-1 px-2 rounded-md`,
+                    )}>
+                    <Text style={tw('text-xs text-black')}>
+                      {episode.number}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            })}
           </View>
           <View>
             <Text>{AnimeInfo?.description}</Text>

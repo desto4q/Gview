@@ -1,46 +1,53 @@
-import {View, TouchableOpacity, RefreshControl,ScrollView} from 'react-native';
+import {View, TouchableOpacity, RefreshControl, ScrollView} from 'react-native';
 import {useEffect, useState} from 'react';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {TextInput} from 'react-native-gesture-handler';
 import {IAnimePage, colors, tw} from '../exports/exports';
 import {queryAnime} from '../utils/utils';
-// import Card from '../components/subcomonents/Card';
 import {AiOutlineSearch} from 'rn-icons/ai';
 import SearchCard from '../components/subcomonents/SearchCard';
 import Loading from '../components/Loading';
-// import Pagination from '@cherry-soft/react-native-basic-pagination';
 import Pager from '../components/subcomonents/Pager';
 import Reload from '../components/Reload';
+import {BsArrowLeft} from 'rn-icons/bs';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SearchScreen() {
   let [searchQuery, setSearchQuery] = useState<string>('naruto');
   let [searchTerm, setSearchTerm] = useState<string>('');
   let [pid, setPid] = useState<number>(1);
+  let navigation = useNavigation();
   let {
     data: AnimeList,
     isFetching,
     isError,
+    isLoading,
     refetch,
-  } = useQuery<IAnimePage>([pid, searchTerm], () => {
-    return queryAnime({
-      pid: pid,
-      query: searchTerm.length > 0 ? searchTerm : 'naruto',
-    });
+  } = useQuery<IAnimePage>({
+    queryKey: [pid, searchTerm],
+    queryFn: () => {
+      return queryAnime({
+        pid: pid,
+        query: searchTerm.length > 0 ? searchTerm : 'naruto',
+      });
+    },
   });
   useEffect(() => {
-    // console.log(AnimeList);
+    console.log(AnimeList);
   }, [AnimeList]);
 
   return (
-    <View style={tw('flex-1 gap-4 ')}>
-      <View style={tw('h-14 justify-center px-2')}>
+    <View style={tw('flex-1 gap-4 px-2 ')}>
+      <View style={tw('h-14 flex-row justify-between px-2')}>
         <View
-          style={tw('pl-2  bg-neutral-800 rounded-md items-center flex-row ')}>
+          style={tw(
+            ' bg-neutral-800 w-full rounded-md items-center flex-row ',
+          )}>
           <TextInput
             onChangeText={setSearchQuery}
             value={searchQuery}
             placeholder="searchhere..."
-            style={tw('w-90%')}
+            style={tw('w-80 px-2')}
             onSubmitEditing={e => {
               setSearchTerm(searchQuery);
             }}
@@ -79,10 +86,12 @@ export default function SearchScreen() {
         ) : (
           <Reload reload={refetch} />
         )}
-        {!isFetching ? (
-          <View style={tw('h-12 items-center flex-row px-2')}>
-            <Pager pid={pid} setPid={setPid} />
-          </View>
+        {!isError ? (
+          !isFetching ? (
+            <View style={tw('h-12 items-center flex-row px-2')}>
+              <Pager pid={pid} setPid={setPid} />
+            </View>
+          ) : null
         ) : null}
         <View style={tw('h-16  w-full')}></View>
       </ScrollView>

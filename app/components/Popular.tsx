@@ -1,24 +1,38 @@
-import {useState} from 'react';
-import {View} from 'react-native';
-import {IAnimePage, hp, tw} from '../exports/exports';
+import {useEffect, useState} from 'react';
+import {Text, View} from 'react-native';
+import {IAnimePage, hp, tw, wp} from '../exports/exports';
 import {fetchPopular} from '../utils/utils';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {useNavigation} from '@react-navigation/native';
 import {Dimensions} from 'react-native';
-import Carousel from 'react-native-reanimated-carousel';
 import PopularCard from './subcomonents/PopularCard';
+import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import Reload from './Reload';
 export default function Popular() {
   const width = Dimensions.get('window').width;
-  let [pid, setPid] = useState<number | string>(2);
-  let {data: airing, refetch} = useQuery<IAnimePage>([pid], () => {
-    return fetchPopular({page: pid});
+  let [pid, setPid] = useState<number | string>(1);
+  let {
+    data: airing,
+    refetch,
+    isError,
+    isFetching,
+  } = useQuery<IAnimePage>({
+    queryKey: [pid, 'Popular'],
+    queryFn: () => {
+      return fetchPopular({page: pid});
+    },
   });
+
   let navigation: any = useNavigation();
+  useEffect(() => {
+    console.log(isError);
+  }, [isError]);
   return (
-    <View style={tw('rounded-b-xl')}>
-      <Carousel
+    <View style={tw('rounded-b-xl   ')}>
+      {/* <Carousel
+        loop={false}
         width={width}
-        windowSize={width*2}
+        windowSize={3}
         style={tw('rounded-b-xl')}
         height={hp(65)}
         data={airing?.results || []}
@@ -28,7 +42,30 @@ export default function Popular() {
               <PopularCard item={item} />
             </View>
           );
-        }}></Carousel>
+        }}></Carousel> */}
+      {/* {isFetching ? <Text>isFetching</Text> : null} */}
+      {!isError ? (
+        <SwiperFlatList
+          style={{...tw('rounded-b-xl'), height: hp(70), overflow: 'hidden'}}
+          data={airing?.results}
+          renderItem={({item}) => {
+            return (
+              <View
+                key={item.id}
+                style={{
+                  ...tw('h-full rounded-b-xl bg-emerald-400'),
+                  width: wp(100),
+                }}>
+                <PopularCard item={item} />
+              </View>
+            );
+          }}
+        />
+      ) : (
+        <View style={{...tw(' bg-neutral-800 rounded-lg '), height: hp(70)}}>
+          <Reload reload={refetch} />
+        </View>
+      )}
     </View>
   );
 }
