@@ -33,6 +33,25 @@ Gview is proudly built using React Native, ensuring a smooth and native-like exp
 
 ---
 
+**Screenshots:**
+
+1. **Home Screen:**
+   ![Home Screen](./assets/Home.png)
+
+2. **Search Screen:**
+   ![Search Screen](./assets//Search.png)
+
+3. **Info Screen:**
+   ![Watch Screen](./assets/Info.png)
+
+4. **Recent Screen:**
+   ![Recent Screen](./assets/Recents.png)
+
+5. **Watch:**
+   ![Recent Screen](./assets/Watch.png)
+
+---
+
 **How to Use:**
 
 1. **Search**: Simply type in the name of the anime you're looking for in the search bar at the top of the app interface. Hit enter or tap the search icon to see the results.
@@ -50,22 +69,25 @@ Gview is proudly built using React Native, ensuring a smooth and native-like exp
 To clone and run Gview locally, follow these steps:
 
 1. **Clone the Repository:**
-   ```
+
+   ```bash
    git clone https://github.com/desto4q/Gview.git
    ```
 
 2. **Navigate to the Project Directory:**
-   ```
+
+   ```bash
    cd Gview
    ```
 
 3. **Install Dependencies:**
-   ```
+
+   ```bash
    npm install
    ```
 
 4. **Run the App:**
-   ```
+   ```bash
    npm start
    ```
    This will start the development server. You can then use Expo Go on your mobile device to scan the QR code and open the app.
