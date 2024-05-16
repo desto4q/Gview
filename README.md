@@ -1,4 +1,4 @@
-**Gview - Your Anime Companion**
+**Gview - Your Anime Companion** 🌟📺
 
 ---
 
@@ -9,19 +9,19 @@ Gview is your ultimate anime companion, designed to bring the world of anime to 
 
 **Features:**
 
-1. **Search**: Effortlessly find your favorite anime titles or discover new ones by searching through our extensive database.
+1. **Search**: Effortlessly find your favorite anime titles or discover new ones by searching through our extensive database. 🔍
 
-2. **Favorites**: Create your personalized collection by marking your favorite anime. Never lose track of the series you love.
+2. **Favorites**: Create your personalized collection by marking your favorite anime. Never lose track of the series you love. ❤️
 
-3. **Different Quality**: Enjoy anime in various resolutions to suit your preferences and bandwidth.
+3. **Different Quality**: Enjoy anime in various resolutions to suit your preferences and bandwidth. 🎥
 
-4. **Fast & Responsive**: Experience seamless browsing and smooth navigation with our fast and responsive interface.
+4. **Fast & Responsive**: Experience seamless browsing and smooth navigation with our fast and responsive interface. ⚡
 
-5. **Maintained**: We are committed to providing you with a consistently updated and well-maintained platform, ensuring you always have access to the latest anime content.
+5. **Maintained**: We are committed to providing you with a consistently updated and well-maintained platform, ensuring you always have access to the latest anime content. 🛠️
 
 ---
 
-**Downloading**: (Work in Progress)
+**Downloading**: (Work in Progress) ⚙️
 
 Stay tuned as we work on integrating a downloading feature, allowing you to enjoy your favorite anime offline, anytime, anywhere.
 
@@ -86,15 +86,26 @@ If you prefer to download a pre-built version of Gview, you can do so from the R
 
 ---
 
-**Compatibility:**
+**Community and Support:**
 
-Gview is available on both iOS and Android devices, ensuring that you can enjoy your favorite anime whether you're using a smartphone or a tablet.
+Join our vibrant community of anime enthusiasts! Connect with fellow users, share your favorite anime recommendations, and stay updated on the latest news and releases.
+
+- **Discord Server**: [Join our Discord community](#) 🌐
+- **Twitter**: Follow us on Twitter for news and updates [@GviewAnime](#) 🐦
+
+---
+
+**Contributing:**
+
+We welcome contributions from the community to help make Gview even better! Whether it's through code contributions, bug reporting, or feature suggestions, your input is valuable to us.
+
+- **Contribution Guidelines**: Check out our [contribution guidelines](CONTRIBUTING.md) to get started. 🛠️
 
 ---
 
 **Get Started:**
 
-Download Gview now and embark on an anime adventure like never before!
+Download Gview now and embark on an anime adventure like never before! 🚀
 
 ---
 
