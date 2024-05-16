@@ -10,12 +10,12 @@ import {useNavigation} from '@react-navigation/native';
 import {AiOutlineArrowLeft} from 'rn-icons/ai';
 import Loading from '../components/Loading';
 import SimpleAccordion from 'react-native-simple-accordion';
+import MyAccordian from '../components/subcomonents/MyAccordian';
 
 export default function InfoScreen({route}: any) {
   let {item}: {item: IAnimeEntry; id: string | number} = route.params;
   let [id, setId] = useState<number | string>(String(item.id));
   let [page, setPage] = useState<number>(1);
-  let [collapsed, SetIsCollapsed] = useState<boolean>(true);
   let navigation = useNavigation<any>();
   useEffect(() => {
     if (item.id) {
@@ -92,22 +92,7 @@ export default function InfoScreen({route}: any) {
             })}
           </View>
 
-          <SimpleAccordion
-            viewContainerStyle={tw('bg-neutral-800')}
-            bannerStyle={tw(
-              ` p-0 h-auto px-2 py-2 bg-neutral-800  ${
-                collapsed ? 'rounded-lg' : 'rounded-t-lg'
-              }`,
-            )}
-            onStateChange={(IsCollapsed: boolean) => {
-              SetIsCollapsed(IsCollapsed);
-            }}
-            titleStyle={tw('text-neutral-400')}
-            arrowColor={colors.neutral[400]}
-            viewInside={<Text>{data?.description}</Text>}
-            title={'description'}
-          />
-
+          <MyAccordian data={data} />
           <View style={tw('flex-row items-center gap-2 flex-wrap')}>
             <Text style={tw('text-lg')}>Episodes:</Text>
             {paginatedData?.map(episode => {

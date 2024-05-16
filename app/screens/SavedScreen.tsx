@@ -2,12 +2,13 @@ import {
   View,
   Text,
   TouchableOpacity,
-  RefreshControl,ScrollView
+  RefreshControl,
+  ScrollView,
 } from 'react-native';
 import {useEffect, useState} from 'react';
 import {IAnimeEntry, JSONParser, resetFav, tw} from '../exports/exports';
 import {Storage} from '../storage/storage';
-// 
+//
 import {SavedCards} from '../components/subcomonents/SavedCard';
 
 export default function SavedScreen() {
@@ -47,8 +48,12 @@ export default function SavedScreen() {
         </View>
       </View>
       <ScrollView
-        refreshControl={ 
-          <RefreshControl enabled refreshing={isRefreshing} onRefresh={updateState} />
+        refreshControl={
+          <RefreshControl
+            enabled
+            refreshing={isRefreshing}
+            onRefresh={updateState}
+          />
         }
         contentContainerStyle={tw('flex-row gap-4 px-4 flex-wrap pb-20')}>
         {items.map(item => {

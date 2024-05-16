@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import Pagination from '@cherry-soft/react-native-basic-pagination';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import Video from 'react-native-video';
+import MyAccordian from '../components/subcomonents/MyAccordian';
 type IQuality = '360p' | '480p' | '720p';
 let Aquality = ['360p', '480p', '720p'];
 export default function WatchScreen({route}: any) {
@@ -107,7 +108,7 @@ export default function WatchScreen({route}: any) {
             })}
           </View>
           <View>
-            <Text>{AnimeInfo?.description}</Text>
+            <MyAccordian data={AnimeInfo} />
           </View>
         </View>
         {AnimeInfo && (

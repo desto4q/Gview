@@ -14,12 +14,12 @@ import Popular from '../components/Popular';
 import TopAiring from '../components/TopAiring';
 import {useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function HomeScreen() {
   const queryClient = useQueryClient();
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  let navigation = useNavigation<any>()
+  let navigation = useNavigation<any>();
   let masReftech = async () => {
     setIsFetching(true);
     await queryClient
@@ -46,7 +46,7 @@ export default function HomeScreen() {
           {/* <Text style={tw('text-lg  ')}>Home</Text> */}
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("SearchScreen")
+              navigation.navigate('SearchScreen');
             }}
             style={tw('ml-auto h-full items-center px-2')}>
             <AiOutlineSearch
