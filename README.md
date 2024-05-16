@@ -39,22 +39,27 @@ Gview is proudly built using React Native, ensuring a smooth and native-like exp
 1. **Home Screen:**
    <br>
    <img src="./assets/Home.png" alt="Home Screen" width="200"/>
+   <br>
 
 2. **Search Screen:**
    <br>
    <img src="./assets/Search.png" alt="Search Screen" width="200"/>
+   <br>
 
 3. **Info Screen:**
    <br>
    <img src="./assets/Info.png" alt="Info Screen" width="200"/>
+   <br>
 
 4. **Recent Screen:**
    <br>
    <img src="./assets/Recents.png" alt="Recent Screen" width="200"/>
+   <br>
 
 5. **Watch:**
    <br>
    <img src="./assets/Watch.png" alt="Watch Screen" width="200"/>
+   <br>
 ---
 
 **How to Use:**
