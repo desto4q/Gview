@@ -27,23 +27,16 @@ export default function SavedScreen() {
   return (
     <View style={tw(' flex-1')}>
       <View style={tw('flex-row items-center px-2 justify-between mb-3')}>
-        <Text style={tw('text-xl')}>SavedScreen</Text>
+        <Text style={tw('text-xl')}>Favorites</Text>
         <View style={tw('flex-row gap-10')}>
-          {/* <TouchableOpacity
-            style={tw('p-2 bg-green-600 my-4')}
-            onPress={() => {
-              updateState();
-            }}>
-            <Text style={tw('text-black')}>refresh</Text>
-          </TouchableOpacity> */}
           <TouchableOpacity
-            style={tw('p-2 ml-auto bg-red-600 my-4')}
+            style={tw('p-2 ml-auto bg-red-600 rounded-md my-4')}
             onPress={async () => {
               resetFav().then(resp => {
                 updateState();
               });
             }}>
-            <Text>reset</Text>
+            <Text style={tw('')}>Reset</Text>
           </TouchableOpacity>
         </View>
       </View>

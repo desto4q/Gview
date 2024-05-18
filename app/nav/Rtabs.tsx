@@ -15,6 +15,8 @@ import {useEffect} from 'react';
 import SearchScreen from '../screens/SearchScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
 import SavedScreen from '../screens/SavedScreen';
+import GenrelistScreen from '../screens/GenrelistScreen';
+import {LiaTableSolid} from 'rn-icons/lia';
 let Tab = createBottomTabNavigator();
 export default function Rtabs() {
   // let navigation = useNavigation();
@@ -70,7 +72,7 @@ export default function Rtabs() {
         }}
         component={SavedScreen}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="DownloadsScreen"
         options={{
           tabBarIcon: ({focused}) => {
@@ -83,6 +85,20 @@ export default function Rtabs() {
           },
         }}
         component={DownloadsScreen}
+      /> */}
+      <Tab.Screen
+        name="GenreListScreen"
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <LiaTableSolid
+                fill={focused ? colors.emerald[400] : colors.neutral[400]}
+                size={22}
+              />
+            );
+          },
+        }}
+        component={GenrelistScreen}
       />
     </Tab.Navigator>
   );

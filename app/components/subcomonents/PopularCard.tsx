@@ -10,7 +10,7 @@ export default function PopularCard({item}: {item: IAnimeEntry}) {
     <View style={tw('  rounded-b-xl  w-full relative ')}>
       <View
         style={tw(
-          'absolute h-full l  w-full bg-black z-2 bg-opacity-30',
+          'absolute h-full  w-full bg-black z-2 bg-opacity-30',
         )}></View>
       <Image
         source={{uri: item.image}}

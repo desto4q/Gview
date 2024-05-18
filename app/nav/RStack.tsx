@@ -4,6 +4,7 @@ import WatchScreen from '../screens/WatchScreen';
 import RecentScreen from '../screens/RecentScreens';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TopAiringScreen from '../screens/TopAiringScreen';
+import GenreScreen from '../screens/GenreScreen';
 let Stack = createNativeStackNavigator();
 export default function RStack() {
   return (
@@ -21,6 +22,13 @@ export default function RStack() {
       <Stack.Screen
         name="TopScreen"
         component={TopAiringScreen}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name="GenreScreen"
+        component={GenreScreen}
         options={{
           animation: 'slide_from_right',
         }}
