@@ -29,7 +29,7 @@ export default function GenrelistScreen() {
           <RefreshControl refreshing={isFetching} onRefresh={refetch} />
         }>
         {data?.map(({title, id}) => {
-          return <GenreListCard title={title} id={id} />;
+          return <GenreListCard key={id} title={title} id={id} />;
         })}
       </ScrollView>
     </View>
