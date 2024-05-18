@@ -5,7 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {AiFillHeart} from 'rn-icons/ai';
 import Loading from '../components/Loading';
 
-interface IGenreCard {
+export interface IGenreCard {
   id: string;
   title: string;
   image: string;
@@ -37,12 +37,12 @@ export default function GenreCard({item}: {item: IGenreCard}) {
         </Text>
         <View style={tw('flex-row items-center gap-2')}>
           {/* <Text
-            style={tw(
+            style={tw( 
               'p-2 capitalize bg-emerald-600 text-xs text-black rounded-lg self-start',
             )}>
             {item.subOrDub}
           </Text> */}
-          <Text>{String(item?.releaseDate).replace('Released: ', '')}</Text>
+          <Text>{String(item?.released).replace('Released: ', '')}</Text>
           <TouchableOpacity
             onPress={() => {
               addToFav(item);

@@ -39,6 +39,7 @@ export default function InfoScreen({route}: any) {
       <View style={tw('flex-1 gap-2 max-w-[90%] w-full self-center')}>
         <View style={tw('h-12  items-center gap-4  flex-row')}>
           <TouchableOpacity
+            style={tw('h-full px-2 items-center justify-center bg-red-200')}
             onPress={() => {
               navigation.goBack();
             }}>
