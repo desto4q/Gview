@@ -5,25 +5,32 @@ import {
   RefreshControl,
   ScrollView,
 } from 'react-native';
-import {useEffect, useState} from 'react';
-import {IAnimeEntry, JSONParser, resetFav, tw} from '../exports/exports';
-import {Storage} from '../storage/storage';
-//
-import {SavedCards} from '../components/subcomonents/SavedCard';
+import { useEffect, useState, useCallback, useMemo } from 'react';
+import { IAnimeEntry, JSONParser, resetFav, tw } from '../exports/exports';
+import { Storage } from '../storage/storage';
+import { SavedCards } from '../components/subcomonents/SavedCard';
 
 export default function SavedScreen() {
-  let [items, setItems] = useState<IAnimeEntry[] | any[]>([]);
-  let [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [items, setItems] = useState<IAnimeEntry[] | any[]>([]);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
-  let updateState = () => {
+  const updateState = useCallback(() => {
     setIsRefreshing(true);
-    let resp = JSONParser(Storage.getString('favorites'));
+    const resp = JSONParser(Storage.getString('favorites'));
     setItems(resp);
     setIsRefreshing(false);
-  };
+  }, []);
+
   useEffect(() => {
     updateState();
-  }, []);
+  }, [updateState]);
+
+  const renderedItems = useMemo(() => {
+    return items.map(item => (
+      <SavedCards updateState={updateState} item={item} key={item.id} />
+    ));
+  }, [items, updateState]);
+
   return (
     <View style={tw(' flex-1')}>
       <View style={tw('flex-row items-center px-2 justify-between mb-3')}>
@@ -32,10 +39,10 @@ export default function SavedScreen() {
           <TouchableOpacity
             style={tw('p-2 ml-auto bg-red-600 rounded-md my-4')}
             onPress={async () => {
-              resetFav().then(resp => {
-                updateState();
-              });
-            }}>
+              await resetFav();
+              updateState();
+            }}
+          >
             <Text style={tw('')}>Reset</Text>
           </TouchableOpacity>
         </View>
@@ -48,14 +55,10 @@ export default function SavedScreen() {
             onRefresh={updateState}
           />
         }
-        contentContainerStyle={tw('flex-row gap-4 px-4 flex-wrap pb-20')}>
-        {items.map(item => {
-          return (
-            <SavedCards updateState={updateState} item={item} key={item.id} />
-          );
-        })}
+        contentContainerStyle={tw('flex-row gap-4 px-4 flex-wrap pb-20')}
+      >
+        {renderedItems}
       </ScrollView>
-      {/* <View style={tw('h-14 w-full')}></View> */}
     </View>
   );
 }

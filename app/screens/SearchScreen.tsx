@@ -37,7 +37,7 @@ export default function SearchScreen() {
 
   return (
     <View style={tw('flex-1 gap-4 px-2 ')}>
-      <View style={tw('h-14 flex-row justify-between px-2')}>
+      <View style={tw('h-14 flex-row justify-between px-2 py-1')}>
         <View
           style={tw(
             ' bg-neutral-800 w-full rounded-md items-center flex-row ',

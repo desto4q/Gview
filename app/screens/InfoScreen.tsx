@@ -1,19 +1,19 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {useEffect, useState} from 'react';
-import {IAnimeEntry, IAnimeInfo, colors, hp, tw} from '../exports/exports';
-import {ScrollView} from 'react-native-gesture-handler';
-import {useQuery} from '@tanstack/react-query';
-import {fetchAnimeInfo} from '../utils/utils';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from 'react';
+import { IAnimeEntry, IAnimeInfo, colors, hp, tw } from '../exports/exports';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useQuery } from '@tanstack/react-query';
+import { fetchAnimeInfo } from '../utils/utils';
 import Pill from '../components/subcomonents/Pill';
 import Pagination from '@cherry-soft/react-native-basic-pagination';
-import {useNavigation} from '@react-navigation/native';
-import {AiOutlineArrowLeft} from 'rn-icons/ai';
+import { useNavigation } from '@react-navigation/native';
+import { AiOutlineArrowLeft } from 'rn-icons/ai';
 import Loading from '../components/Loading';
 import SimpleAccordion from 'react-native-simple-accordion';
 import MyAccordian from '../components/subcomonents/MyAccordian';
 
-export default function InfoScreen({route}: any) {
-  let {item}: {item: IAnimeEntry; id: string | number} = route.params;
+export default function InfoScreen({ route }: any) {
+  let { item }: { item: IAnimeEntry; id: string | number } = route.params;
   let [id, setId] = useState<number | string>(String(item.id));
   let [page, setPage] = useState<number>(1);
   let navigation = useNavigation<any>();
@@ -22,11 +22,11 @@ export default function InfoScreen({route}: any) {
       setId(item.id);
     }
   }, [item.id]);
-  let {data, isFetching} = useQuery<IAnimeInfo>({
+  let { data, isFetching } = useQuery<IAnimeInfo>({
     queryKey: [id],
     queryFn: async () => {
       if (id) {
-        return await fetchAnimeInfo({id: id});
+        return await fetchAnimeInfo({ id: id });
       }
     },
   });
@@ -51,13 +51,13 @@ export default function InfoScreen({route}: any) {
           style={tw('flex-1')}
           contentContainerStyle={tw('gap-2 px-2')}
           showsVerticalScrollIndicator={false}>
-          <View style={{...tw('w-full self-center'), height: hp(60)}}>
+          <View style={{ ...tw('w-full self-center'), height: hp(60) }}>
             {isFetching ? (
               <Loading />
             ) : (
               data?.image && (
                 <Image
-                  source={{uri: data?.image}}
+                  source={{ uri: data?.image }}
                   style={tw('w-full h-full rounded-2xl')}></Image>
               )
             )}
