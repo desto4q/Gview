@@ -1,16 +1,16 @@
-import {View, TouchableOpacity, RefreshControl, ScrollView} from 'react-native';
-import {useEffect, useState} from 'react';
-import {useQuery} from '@tanstack/react-query';
-import {TextInput} from 'react-native-gesture-handler';
-import {IAnimePage, colors, tw} from '../exports/exports';
-import {queryAnime} from '../utils/utils';
-import {AiOutlineSearch} from 'rn-icons/ai';
+import { View, TouchableOpacity, RefreshControl, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { TextInput } from 'react-native-gesture-handler';
+import { IAnimePage, colors, tw } from '../exports/exports';
+import { queryAnime } from '../utils/utils';
+import { AiOutlineSearch } from 'rn-icons/ai';
 import SearchCard from '../components/subcomonents/SearchCard';
 import Loading from '../components/Loading';
 import Pager from '../components/subcomonents/Pager';
 import Reload from '../components/Reload';
-import {BsArrowLeft} from 'rn-icons/bs';
-import {useNavigation} from '@react-navigation/native';
+import { BsArrowLeft } from 'rn-icons/bs';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SearchScreen() {
   let [searchQuery, setSearchQuery] = useState<string>('naruto');
@@ -33,7 +33,6 @@ export default function SearchScreen() {
     },
   });
   useEffect(() => {
-    console.log(AnimeList);
   }, [AnimeList]);
 
   return (

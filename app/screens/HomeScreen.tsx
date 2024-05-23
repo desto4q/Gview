@@ -5,22 +5,23 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import {colors, tw} from '../exports/exports';
+import { colors, tw } from '../exports/exports';
 
 import RecentEpisodes from '../components/RecentEpisodes';
-import {AiOutlineSearch} from 'rn-icons/ai';
+import { AiOutlineSearch } from 'rn-icons/ai';
 import LinearGradient from 'react-native-linear-gradient';
 import Popular from '../components/Popular';
 import TopAiring from '../components/TopAiring';
-import {useQueryClient} from '@tanstack/react-query';
-import {useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
+import { useCallback, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+
   const queryClient = useQueryClient();
   const [isFetching, setIsFetching] = useState<boolean>(false);
   let navigation = useNavigation<any>();
-  let masReftech = async () => {
+  let masReftech = useCallback(async () => {
     setIsFetching(true);
     await queryClient
       .refetchQueries()
@@ -31,7 +32,7 @@ export default function HomeScreen() {
       .catch(err => {
         console.log(err);
       });
-  };
+  }, [queryClient])
   return (
     <View style={tw('flex-1')}>
       <ScrollView

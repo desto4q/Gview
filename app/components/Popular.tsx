@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
-import {IAnimePage, hp, tw, wp} from '../exports/exports';
-import {fetchPopular} from '../utils/utils';
-import {useQuery} from '@tanstack/react-query';
-import {useNavigation} from '@react-navigation/native';
-import {Dimensions} from 'react-native';
+import { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { IAnimePage, hp, tw, wp } from '../exports/exports';
+import { fetchPopular } from '../utils/utils';
+import { useQuery } from '@tanstack/react-query';
+import { useNavigation } from '@react-navigation/native';
+import { Dimensions } from 'react-native';
 import PopularCard from './subcomonents/PopularCard';
-import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import Reload from './Reload';
 export default function Popular() {
   const width = Dimensions.get('window').width;
@@ -19,13 +19,12 @@ export default function Popular() {
   } = useQuery<IAnimePage>({
     queryKey: [pid, 'Popular'],
     queryFn: () => {
-      return fetchPopular({page: pid});
+      return fetchPopular({ page: pid });
     },
   });
 
   let navigation: any = useNavigation();
   useEffect(() => {
-    console.log(isError);
   }, [isError]);
   return (
     <View style={tw('rounded-b-xl   ')}>
@@ -46,9 +45,9 @@ export default function Popular() {
       {/* {isFetching ? <Text>isFetching</Text> : null} */}
       {!isError ? (
         <SwiperFlatList
-          style={{...tw('rounded-b-xl'), height: hp(70), overflow: 'hidden'}}
+          style={{ ...tw('rounded-b-xl'), height: hp(70), overflow: 'hidden' }}
           data={airing?.results}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return (
               <View
                 key={item.id}
@@ -62,7 +61,7 @@ export default function Popular() {
           }}
         />
       ) : (
-        <View style={{...tw(' bg-neutral-800 rounded-lg '), height: hp(70)}}>
+        <View style={{ ...tw(' bg-neutral-800 rounded-lg '), height: hp(70) }}>
           <Reload reload={refetch} />
         </View>
       )}

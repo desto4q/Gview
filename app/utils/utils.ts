@@ -90,7 +90,7 @@ const fetchgenreList = async () => {
     );
     return response.data;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 const fetchGenre = async ({page}: IApiProps) => {
@@ -102,7 +102,7 @@ const fetchGenre = async ({page}: IApiProps) => {
     );
     return response.data;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 export {

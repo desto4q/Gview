@@ -1,10 +1,10 @@
-import {View, Image, Text} from 'react-native';
-import {IAnimeEntry, addToFav, colors, tw} from '../../exports/exports';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
+import { View, Image, Text } from 'react-native';
+import { IAnimeEntry, addToFav, colors, tw } from '../../exports/exports';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {AiFillHeart, AiFillPlayCircle} from 'rn-icons/ai';
-export default function PopularCard({item}: {item: IAnimeEntry}) {
+import { AiFillHeart, AiFillPlayCircle } from 'rn-icons/ai';
+export default function PopularCard({ item }: { item: IAnimeEntry }) {
   let navigation = useNavigation<any>();
   return (
     <View style={tw('  rounded-b-xl  w-full relative ')}>
@@ -13,8 +13,8 @@ export default function PopularCard({item}: {item: IAnimeEntry}) {
           'absolute h-full  w-full bg-black z-2 bg-opacity-30',
         )}></View>
       <Image
-        source={{uri: item.image}}
-        style={{...tw(' h-full rounded-b-xl w-full ')}}></Image>
+        source={{ uri: item.image }}
+        style={{ ...tw(' h-full rounded-b-xl w-full ') }}></Image>
 
       <LinearGradient
         colors={['transparent', colors.neutral[900]]}
