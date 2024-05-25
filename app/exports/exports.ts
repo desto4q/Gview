@@ -7,7 +7,7 @@ import {
 } from 'react-native-responsive-screen';
 import {Storage} from '../storage/storage';
 import Toast from 'react-native-toast-message';
-import EventEmitter from 'react-native/Libraries/vendor/emitter/EventEmitter';
+import { NativeEventEmitter } from 'react-native';
 let colors = tailwind;
 
 interface IEpisode {
@@ -136,10 +136,8 @@ let addToFav = async (item: any) => {
   }
 };
 
-const eventEmitter = new EventEmitter();
-const openModal = ({child}: {child: any}) => {
-  
-};
+const eventEmitter = new NativeEventEmitter();
+const openModal = ({child}: {child: any}) => {};
 
 let link =
   'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_5MB.mp4';
@@ -152,7 +150,8 @@ export {
   addToFav,
   deleteFromFav,
   JSONParser,
-  resetFav,eventEmitter,
+  resetFav,
+  eventEmitter,
   link,
 };
 export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo, EpisodeData};

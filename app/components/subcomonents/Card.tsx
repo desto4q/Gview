@@ -1,16 +1,21 @@
-import {View, Text, Image} from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
-import {IAnimeEntry, addToFav, tw} from '../../exports/exports';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
-import {AiFillHeart} from 'rn-icons/ai';
+import { IAnimeEntry, addToFav, eventEmitter, tw } from '../../exports/exports';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { AiFillHeart } from 'rn-icons/ai';
+import SheetInfo from '../SheetInfo';
 
-export default function Card({item}: {item: IAnimeEntry}) {
+export default function Card({ item }: { item: IAnimeEntry }) {
   let navigation = useNavigation<any>();
 
   return (
     <View style={tw('w-1/2  max-w-38 mb-4  rounded-lg')}>
       <TouchableOpacity
+        delayLongPress={200}
+        onLongPress={() => {
+          eventEmitter.emit("openSheet", { children: <SheetInfo id={item.id} /> })
+        }}
         style={tw('gap-2')}
         onPress={() => {
           navigation.navigate('InfoScreen', {
@@ -19,7 +24,7 @@ export default function Card({item}: {item: IAnimeEntry}) {
           });
         }}>
         <Image
-          source={{uri: item.image}}
+          source={{ uri: item.image }}
           style={tw('w-full h-50 rounded-lg')}
         />
         <Text style={tw('h-[1rem]')} numberOfLines={1}>

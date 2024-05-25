@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { EpisodeData, IAnimeInfo, eventEmitter, hp, tw } from '../exports/exports';
 import { fetchAnimeInfo, fetchEpisode } from '../utils/utils';
@@ -44,6 +44,9 @@ export default function WatchScreen({ route }: any) {
       visibilityTime: 1000
     });
   }
+  useEffect(()=>{
+    eventEmitter.emit("closeSheet")
+  },[])
   return (
     <View style={tw('flex-1 p-2')}>
       <View style={tw('h-14  justify-center')}>

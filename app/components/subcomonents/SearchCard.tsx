@@ -1,19 +1,23 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {IAnimeEntry, addToFav, tw} from '../../exports/exports';
-import {useNavigation} from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { IAnimeEntry, addToFav, eventEmitter, tw } from '../../exports/exports';
+import { useNavigation } from '@react-navigation/native';
 import Loading from '../Loading';
-import {AiFillHeart} from 'rn-icons/ai';
+import { AiFillHeart } from 'rn-icons/ai';
+import SheetInfo from '../SheetInfo';
 
 interface ISearchEntry extends IAnimeEntry {
   subOrDub?: 'sub' | 'dub';
   releaseDate?: string;
 }
-export default function SearchCard({item}: {item: ISearchEntry}) {
+export default function SearchCard({ item }: { item: ISearchEntry }) {
   let navigation = useNavigation<any>();
   return (
     <View style={tw('w-1/2  max-w-38  rounded-lg')}>
       <TouchableOpacity
         style={tw('gap-2')}
+        onLongPress={() => {
+          eventEmitter.emit("openSheet", { children: <SheetInfo id={item.id} /> })
+        }}
         onPress={() => {
           navigation.navigate('InfoScreen', {
             item: item,
@@ -22,7 +26,7 @@ export default function SearchCard({item}: {item: ISearchEntry}) {
         }}>
         {item.image ? (
           <Image
-            source={{uri: item.image}}
+            source={{ uri: item.image }}
             style={tw('w-full h-60 rounded-lg')}
           />
         ) : (
