@@ -15,6 +15,7 @@ import TopAiring from '../components/TopAiring';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import MyBottomSheet from '../components/MyBottomSheet';
 
 export default function HomeScreen() {
 
@@ -34,35 +35,39 @@ export default function HomeScreen() {
             });
     }, [queryClient])
     return (
-        <View style={tw('flex-1')}>
-            <ScrollView
-                refreshControl={
-                    <RefreshControl refreshing={isFetching} onRefresh={masReftech} />
-                }>
-                <LinearGradient
-                    colors={[colors.neutral[900], 'transparent']}
-                    style={tw(
-                        'h-12 items-center px-2 flex-1  absolute w-full flex-row z-10',
-                    )}>
-                    {/* <Text style={tw('text-lg  ')}>Home</Text> */}
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate('SearchScreen');
-                        }}
-                        style={tw('ml-auto h-full items-center px-2')}>
-                        <AiOutlineSearch
-                            fill={colors.neutral[200]}
-                            size={24}
-                            style={tw('m-auto')}
-                        />
-                    </TouchableOpacity>
-                </LinearGradient>
+        <>
+            <View style={tw('flex-1')}>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl refreshing={isFetching} onRefresh={masReftech} />
+                    }>
+                    <LinearGradient
+                        colors={[colors.neutral[900], 'transparent']}
+                        style={tw(
+                            'h-12 items-center px-2 flex-1  absolute w-full flex-row z-10',
+                        )}>
+                        {/* <Text style={tw('text-lg  ')}>Home</Text> */}
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate('SearchScreen');
+                            }}
+                            style={tw('ml-auto h-full items-center px-2')}>
+                            <AiOutlineSearch
+                                fill={colors.neutral[200]}
+                                size={24}
+                                style={tw('m-auto')}
+                            />1
+                        </TouchableOpacity>
+                    </LinearGradient>
 
-                <Popular />
-                <TopAiring />
-                <RecentEpisodes />
-                <View style={tw('h-14')}></View>
-            </ScrollView>
-        </View>
+                    <Popular />
+                    <TopAiring />
+                    <RecentEpisodes />
+                    <View style={tw('h-14')}></View>
+                </ScrollView>
+
+            </View>
+        </>
+
     );
 }

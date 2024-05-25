@@ -5,7 +5,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { Storage } from '../storage/storage';
+import {Storage} from '../storage/storage';
+import Toast from 'react-native-toast-message';
 let colors = tailwind;
 
 interface IEpisode {
@@ -38,7 +39,7 @@ interface IAnimeEntry {
   genres?: string[];
   episodeId?: string;
   episodeNumber?: number;
-  releaseDate?: string
+  releaseDate?: string;
 }
 
 interface IAnimePage {
@@ -81,6 +82,13 @@ let deleteFromFav = async (item: any) => {
     let resp: IAnimeEntry[] = await JSONParser(Storage.getString('favorites'));
     resp = await resp.filter(itm => item.id != itm.id);
     Storage.set('favorites', JSON.stringify(resp));
+    Toast.show({
+      type: 'success',
+      topOffset: 20,
+      visibilityTime: 1000,
+      text1: 'Deleted',
+      text2: 'Anime Deleted',
+    });
   } catch (err) {
     return err;
   }
@@ -96,6 +104,13 @@ let addToFav = async (item: any) => {
       }
     }
     if (exists) {
+      Toast.show({
+        type: 'info',
+        visibilityTime: 1000,
+        topOffset: 20,
+        text1: 'Exists',
+        text2: 'Anime already added',
+      });
       return null;
     }
     let newItem = {
@@ -106,6 +121,13 @@ let addToFav = async (item: any) => {
     };
     let newList = [...resp, newItem];
     Storage.set('favorites', JSON.stringify(newList));
+    Toast.show({
+      type: 'success',
+      topOffset: 20,
+      visibilityTime: 1000,
+      text1: 'Added',
+      text2: 'Anime added',
+    });
     // console.log(newList);
     return newList;
   } catch (err) {

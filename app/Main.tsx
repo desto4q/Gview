@@ -5,11 +5,12 @@ import { DarkTheme, NavigationContainer } from '@react-navigation/native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Storage } from './storage/storage'
 import { ExternalStorageDirectoryPath, exists, mkdir } from '@dr.pogodin/react-native-fs'
+import MyBottomSheet from './components/MyBottomSheet'
 
 export default function Main() {
-    let client = new QueryClient()
-    
-async function requestExternalStoragePermission() {
+  let client = new QueryClient()
+
+  async function requestExternalStoragePermission() {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
@@ -58,11 +59,13 @@ async function requestExternalStoragePermission() {
     };
   }, []);
 
-    return (
-        <NavigationContainer theme={DarkTheme}>
-            <QueryClientProvider client={client}>
-                <RStack />
-            </QueryClientProvider>
-        </NavigationContainer>
-    )
+  return (
+    <NavigationContainer theme={DarkTheme}>
+      <QueryClientProvider client={client}>
+        <RStack />
+        <MyBottomSheet />
+
+      </QueryClientProvider>
+    </NavigationContainer>
+  )
 }
