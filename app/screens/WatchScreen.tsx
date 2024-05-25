@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { EpisodeData, IAnimeInfo, hp, tw } from '../exports/exports';
+import { EpisodeData, IAnimeInfo, eventEmitter, hp, tw } from '../exports/exports';
 import { fetchAnimeInfo, fetchEpisode } from '../utils/utils';
 import { useNavigation } from '@react-navigation/native';
 import Pagination from '@cherry-soft/react-native-basic-pagination';
@@ -49,11 +49,11 @@ export default function WatchScreen({ route }: any) {
       <View style={tw('h-14  justify-center')}>
         <Text style={tw('text-lg')}>{AnimeInfo?.title}</Text>
       </View>
-      {/* <TouchableOpacity style={tw("p-2 self-start bg-neutral-400 rounded-md ")} onPress={() => {
-        showToast()
+      <TouchableOpacity style={tw("p-2 self-start bg-neutral-400 rounded-md ")} onPress={() => {
+        eventEmitter.emit("openSheet")
       }}>
         <Text style={tw("text-black")}>show toast</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
       <View
         style={{
           ...tw('w-full bg-neutral-600 bg-opacity-20 h-1/2 '),

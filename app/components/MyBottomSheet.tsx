@@ -1,20 +1,25 @@
 import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
 
 import { View, Text } from 'react-native'
-import React, { useEffect, useRef } from 'react'
-import { hp, tw } from '../exports/exports';
+import React, { useCallback, useEffect, useRef } from 'react'
+import { eventEmitter, hp, tw } from '../exports/exports';
 
-export default function MyBottomSheet() {
+export default function MyBottomSheet({ children }: { children: any }) {
     const sheetRef = useRef<BottomSheetMethods>(null);
-    useEffect(() => {
+    const openSheet = useCallback(() => {
         sheetRef.current?.open()
-    })
+    }, [])
+    useEffect(() => {
+      
+        eventEmitter.addListener("openSheet", openSheet)
+        return () => {
+            eventEmitter.removeAllListeners("openSheet")
+        };
+    }, []);
     return (
 
-        <BottomSheet height={hp(90)} ref={sheetRef} style={tw("bg-neutral-700 p-2")} animationType='slide' modal={true}>
-            <Text>
-                The smart 😎, tiny 📦, and flexible 🎗 bottom sheet your app craves 🚀
-            </Text>
+        <BottomSheet disableBodyPanning dragHandleStyle={tw("bg-white")} height={hp(70)} ref={sheetRef} style={tw("bg-neutral-800 p-2")} animationType='slide' modal={true}>
+            {children}
         </BottomSheet>
 
     )

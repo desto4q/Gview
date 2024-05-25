@@ -56,7 +56,7 @@ export default function HomeScreen() {
                                 fill={colors.neutral[200]}
                                 size={24}
                                 style={tw('m-auto')}
-                            />1
+                            />
                         </TouchableOpacity>
                     </LinearGradient>
 
