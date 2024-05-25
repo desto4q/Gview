@@ -7,7 +7,8 @@ import {
 } from 'react-native-responsive-screen';
 import {Storage} from '../storage/storage';
 import Toast from 'react-native-toast-message';
-import { NativeEventEmitter } from 'react-native';
+import {NativeEventEmitter} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 let colors = tailwind;
 
 interface IEpisode {
@@ -135,6 +136,39 @@ let addToFav = async (item: any) => {
     return err;
   }
 };
+let versionChecker = async () => {
+  let version = DeviceInfo.getVersion();
+  const newVersion = version.replace(/\.\d+$/, '');
+  return Number(newVersion);
+};
+interface IUpdateProp {
+  version: number;
+  minimumversion: number;
+  breaking: true;
+}
+let updateChecker = async () => {
+  try {
+    const response: IUpdateProp = await fetch(
+      'https://api.jsonbin.io/v3/b/664bead4ad19ca34f86ca2d8?meta=false',
+    ).then(resp => {
+      return resp.json();
+    });
+    if ((await versionChecker()) < response.minimumversion) {
+      return true;
+    }
+    if ((await versionChecker()) < response.version) {
+      return false;
+    }
+    if (
+      (await versionChecker()) < response.version &&
+      response.breaking == true
+    ) {
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
+};
 
 const eventEmitter = new NativeEventEmitter();
 const openModal = ({child}: {child: any}) => {};
@@ -151,7 +185,9 @@ export {
   deleteFromFav,
   JSONParser,
   resetFav,
+  updateChecker,
   eventEmitter,
+  versionChecker,
   link,
 };
 export type {IAnimeEntry, IAnimePage, IEpisode, IAnimeInfo, EpisodeData};

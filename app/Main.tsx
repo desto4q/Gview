@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Storage } from './storage/storage'
 import { ExternalStorageDirectoryPath, exists, mkdir } from '@dr.pogodin/react-native-fs'
 import { BottomSheetProvider } from './components/MyBottomSheet'
+import CheckForUpdate from './components/UpdateChecker'
 
 export default function Main() {
   let client = new QueryClient()
@@ -21,14 +22,14 @@ export default function Main() {
         },
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('Read external storage permission granted');
+        // console.log('Read external storage permission granted');
         // You can now proceed with reading files from external storage
       } else {
-        console.log('Read external storage permission denied');
+        // console.log('Read external storage permission denied');
         // Handle permission denial
       }
     } catch (err) {
-      console.warn('Error requesting external storage permission:', err);
+      // console.warn('Error requesting external storage permission:', err);
     }
   }
   useEffect(() => {
@@ -60,10 +61,10 @@ export default function Main() {
   }, []);
 
   return (
-    <NavigationContainer theme={DarkTheme}>
-
+    <NavigationContainer  theme={DarkTheme}>
       <QueryClientProvider client={client}>
         <BottomSheetProvider>
+          
           <RStack />
         </BottomSheetProvider>
       </QueryClientProvider>

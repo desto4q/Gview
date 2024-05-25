@@ -23,7 +23,7 @@ const SheetInfoData = ({ data }: { data?: IAnimeInfo }) => {
   }
 
   return (
-    <View style={tw("h-full gap-2 bg-neutral-900 w-full rounded-md p-2 pb-20")}>
+    <View style={tw("h-full gap-2 bg-neutral-900 w-full rounded-md p-2 pb-20 relative")}>
       <View style={tw("w-full")}>
         <Image source={{ uri: data?.image }} style={tw("h-100 w-4/5 self-center rounded-md")} />
       </View>
@@ -37,11 +37,11 @@ const SheetInfoData = ({ data }: { data?: IAnimeInfo }) => {
           <Text style={tw(data?.status === "Ongoing" ? "text-amber-400" : "text-emerald-400")}>
             {data?.status}
           </Text>
-          <Text style={tw("px-2 py-1 text-black bg-emerald-400 rounded-md")}>
+          <Text style={tw("px-2 py-1 text-black uppercase bg-emerald-400 rounded-md")}>
             {data?.subOrDub}
           </Text>
         </View>
-        <View style={tw("flex-row gap-2 flex-wrap items-center self-center")}>
+        <View style={tw("flex-row gap-2 flex-wrap items-center justify-center self-center")}>
           {data?.genres.slice(0, 4).map((item) => (
             <Text style={tw("text-emerald-400 border border-emerald-400 p-1 px-2 rounded-md")} key={item}>
               {item}
@@ -55,9 +55,9 @@ const SheetInfoData = ({ data }: { data?: IAnimeInfo }) => {
 
           <Text>Episodes:</Text>
           {data?.episodes.slice(-10).reverse().map((episode, index) => {
-           
 
-            return <TouchableOpacity onPress={async () => {
+
+            return <TouchableOpacity key={episode.id} onPress={async () => {
               try {
 
                 navigation.navigate('WatchScreen', {
@@ -67,7 +67,7 @@ const SheetInfoData = ({ data }: { data?: IAnimeInfo }) => {
                 })
               }
               catch (err) {
-                console.log(err)
+                // console.log(err)
               }
             }} style={tw("self-start px-2 py-1 bg-emerald-400 rounded-md")}>
               <Text style={tw('text-black')}> {episode.number}</Text>
@@ -75,10 +75,16 @@ const SheetInfoData = ({ data }: { data?: IAnimeInfo }) => {
           })}
 
         </View>
-        <View>
 
-        </View>
+
       </View>
+      {/* <View style={tw("absolute right-0 mr-1 mt-4 top-0")}>
+          <TouchableOpacity style={tw("p-2 bg-amber-400 rounded-md")} >
+            <Text>
+              Go
+            </Text>
+          </TouchableOpacity>
+        </View> */}
     </View>
   );
 };

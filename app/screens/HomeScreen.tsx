@@ -15,7 +15,7 @@ import TopAiring from '../components/TopAiring';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import MyBottomSheet from '../components/MyBottomSheet';
+import CheckForUpdate from '../components/UpdateChecker';
 
 export default function HomeScreen() {
 
@@ -37,6 +37,7 @@ export default function HomeScreen() {
     return (
         <>
             <View style={tw('flex-1')}>
+                <CheckForUpdate />
                 <ScrollView
                     refreshControl={
                         <RefreshControl refreshing={isFetching} onRefresh={masReftech} />

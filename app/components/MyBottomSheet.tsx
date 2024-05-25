@@ -1,13 +1,14 @@
-import React, { ReactNode, createContext, useContext, useRef, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useRef, useState, useMemo } from 'react';
 import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
-import { ScrollView, Text, Easing, View } from 'react-native';
+import { ScrollView, View, Easing } from 'react-native';
 import { hp, tw } from '../exports/exports'; // Ensure these are correctly defined and imported
 
-
-const BottomSheetContext = createContext<{
+interface BottomSheetContextType {
     openSheet: (content: ReactNode) => void;
     closeSheet: () => void;
-} | null>(null);
+}
+
+const BottomSheetContext = createContext<BottomSheetContextType | null>(null);
 
 export const BottomSheetProvider = ({ children }: { children: ReactNode }) => {
     const sheetRef = useRef<BottomSheetMethods>(null);
@@ -20,11 +21,13 @@ export const BottomSheetProvider = ({ children }: { children: ReactNode }) => {
 
     const closeSheet = () => {
         sheetRef.current?.close();
-        setBottomSheetContent(null);
+        // setBottomSheetContent(null);
     };
 
+    const value = useMemo(() => ({ openSheet, closeSheet }), [openSheet, closeSheet]);
+
     return (
-        <BottomSheetContext.Provider value={{ openSheet, closeSheet }}>
+        <BottomSheetContext.Provider  value={value}>
             {children}
             <BottomSheet
                 dragHandleStyle={tw("bg-white")}
@@ -38,14 +41,14 @@ export const BottomSheetProvider = ({ children }: { children: ReactNode }) => {
                 modal={true}
             >
                 <ScrollView contentContainerStyle={tw("")}>
-                    {bottomSheetContent || <View></View>}
+                    {bottomSheetContent || <View />}
                 </ScrollView>
             </BottomSheet>
         </BottomSheetContext.Provider>
     );
 };
 
-export const useBottomSheet = () => {
+export const useBottomSheet = (): BottomSheetContextType => {
     const context = useContext(BottomSheetContext);
     if (!context) {
         throw new Error('useBottomSheet must be used within a BottomSheetProvider');
