@@ -15,7 +15,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Reload from '../components/Reload';
 import Loading from '../components/Loading';
 import Card from '../components/subcomonents/Card';
-import GenreCard, {IGenreCard} from './GenreCard';
+import GenreCard, {IGenreCard} from '../components/subcomonents/GenreCard';
 import {AiOutlineArrowLeft} from 'rn-icons/ai';
 
 const GenreScreen = ({route}: {route: any}) => {
@@ -37,7 +37,9 @@ const GenreScreen = ({route}: {route: any}) => {
     <View>
       <View style={tw('h-10 flex-row items-center ')}>
         <TouchableOpacity
+       
           onPress={() => {
+
             navigation.goBack();
           }}
           style={tw('h-full px-2  items-center justify-center')}>

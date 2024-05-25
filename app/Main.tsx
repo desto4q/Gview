@@ -5,7 +5,7 @@ import { DarkTheme, NavigationContainer } from '@react-navigation/native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Storage } from './storage/storage'
 import { ExternalStorageDirectoryPath, exists, mkdir } from '@dr.pogodin/react-native-fs'
-import MyBottomSheet from './components/MyBottomSheet'
+import { BottomSheetProvider } from './components/MyBottomSheet'
 
 export default function Main() {
   let client = new QueryClient()
@@ -61,10 +61,11 @@ export default function Main() {
 
   return (
     <NavigationContainer theme={DarkTheme}>
-      <QueryClientProvider client={client}>
-        <RStack />
-        <MyBottomSheet />
 
+      <QueryClientProvider client={client}>
+        <BottomSheetProvider>
+          <RStack />
+        </BottomSheetProvider>
       </QueryClientProvider>
     </NavigationContainer>
   )

@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Loading from '../Loading';
 import { AiFillHeart } from 'rn-icons/ai';
 import SheetInfo from '../SheetInfo';
+import { useBottomSheet } from '../MyBottomSheet';
 
 interface ISearchEntry extends IAnimeEntry {
   subOrDub?: 'sub' | 'dub';
@@ -11,12 +12,14 @@ interface ISearchEntry extends IAnimeEntry {
 }
 export default function SearchCard({ item }: { item: ISearchEntry }) {
   let navigation = useNavigation<any>();
+  let { openSheet } = useBottomSheet()
   return (
     <View style={tw('w-1/2  max-w-38  rounded-lg')}>
       <TouchableOpacity
         style={tw('gap-2')}
+        delayLongPress={300}
         onLongPress={() => {
-          eventEmitter.emit("openSheet", { children: <SheetInfo id={item.id} /> })
+          openSheet(<SheetInfo id={item.id} />)
         }}
         onPress={() => {
           navigation.navigate('InfoScreen', {

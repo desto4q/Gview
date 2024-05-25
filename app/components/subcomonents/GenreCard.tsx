@@ -1,9 +1,11 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {IAnimeEntry, addToFav, tw} from './../exports/exports';
-import {useNavigation} from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { IAnimeEntry, addToFav, eventEmitter, tw } from '../../exports/exports';
+import { useNavigation } from '@react-navigation/native';
 
-import {AiFillHeart} from 'rn-icons/ai';
-import Loading from '../components/Loading';
+import { AiFillHeart } from 'rn-icons/ai';
+import Loading from '../Loading';
+import SheetInfo from '../SheetInfo';
+import { useBottomSheet } from '../MyBottomSheet';
 
 export interface IGenreCard {
   id: string;
@@ -12,12 +14,18 @@ export interface IGenreCard {
   released: string;
   url: string;
 }
-export default function GenreCard({item}: {item: IGenreCard}) {
+export default function GenreCard({ item }: { item: IGenreCard }) {
   let navigation: any = useNavigation();
+  const { openSheet, closeSheet } = useBottomSheet();
   return (
     <View style={tw('w-1/2  max-w-38  rounded-lg')}>
       <TouchableOpacity
         style={tw('gap-2')}
+        delayLongPress={200}
+        onLongPress={() => {
+         openSheet(<SheetInfo id={item.id}/>)
+        }}
+        
         onPress={() => {
           navigation.navigate('InfoScreen', {
             item: item,
@@ -26,7 +34,7 @@ export default function GenreCard({item}: {item: IGenreCard}) {
         }}>
         {item.image ? (
           <Image
-            source={{uri: item.image}}
+            source={{ uri: item.image }}
             style={tw('w-full h-60 rounded-lg')}
           />
         ) : (

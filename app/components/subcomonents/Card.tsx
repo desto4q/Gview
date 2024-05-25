@@ -5,16 +5,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { AiFillHeart } from 'rn-icons/ai';
 import SheetInfo from '../SheetInfo';
+import { useBottomSheet } from '../MyBottomSheet';
 
 export default function Card({ item }: { item: IAnimeEntry }) {
   let navigation = useNavigation<any>();
+  let { openSheet } = useBottomSheet()
 
   return (
     <View style={tw('w-1/2  max-w-38 mb-4  rounded-lg')}>
       <TouchableOpacity
-        delayLongPress={200}
+        delayLongPress={300}
         onLongPress={() => {
-          eventEmitter.emit("openSheet", { children: <SheetInfo id={item.id} /> })
+          openSheet(<SheetInfo id={item.id} />)
         }}
         style={tw('gap-2')}
         onPress={() => {

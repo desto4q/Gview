@@ -9,6 +9,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import MyAccordian from '../components/subcomonents/MyAccordian';
 import Toast from 'react-native-toast-message';
+import { useBottomSheet } from '../components/MyBottomSheet';
 type IQuality = '360p' | '480p' | '720p';
 let Aquality = ['360p', '480p', '720p'];
 export default function WatchScreen({ route }: any) {
@@ -35,28 +36,24 @@ export default function WatchScreen({ route }: any) {
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const paginatedData = AnimeInfo?.episodes.slice(startIndex, endIndex);
-  // console.log(episode);
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Hello',
-      text2: 'This is some something 👋',
-      visibilityTime: 1000
-    });
-  }
-  useEffect(()=>{
-    eventEmitter.emit("closeSheet")
-  },[])
+  let { closeSheet } = useBottomSheet()
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      closeSheet();
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [])
   return (
     <View style={tw('flex-1 p-2')}>
       <View style={tw('h-14  justify-center')}>
         <Text style={tw('text-lg')}>{AnimeInfo?.title}</Text>
       </View>
-      <TouchableOpacity style={tw("p-2 self-start bg-neutral-400 rounded-md ")} onPress={() => {
+      {/* <TouchableOpacity style={tw("p-2 self-start bg-neutral-400 rounded-md ")} onPress={() => {
         eventEmitter.emit("openSheet")
       }}>
         <Text style={tw("text-black")}>show toast</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <View
         style={{
           ...tw('w-full bg-neutral-600 bg-opacity-20 h-1/2 '),
